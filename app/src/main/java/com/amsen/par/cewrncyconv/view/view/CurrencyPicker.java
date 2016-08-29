@@ -17,6 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * Wrapper to add the arrow stuff ontop of the pager
+ * (simpler to use the existing gfx framework than to use onDraw)
+ *
  * @author Pär Amsen 2016
  */
 public class CurrencyPicker extends FrameLayout {
