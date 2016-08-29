@@ -1,5 +1,6 @@
 # Built application files
 *.apk
+!*CewrncyConv.apk
 *.ap_
 
 # Files for the ART/Dalvik VM
