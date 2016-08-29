@@ -1,5 +1,7 @@
 package com.amsen.par.cewrncyconv.base.util;
 
+import android.util.Pair;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +16,7 @@ import java.net.URL;
  * @author Pär Amsen 2016
  */
 public class Http {
-    public static Reader get(String rawUrl) {
+    public static Pair<Reader, HttpURLConnection> get(String rawUrl) {
         try {
             URL url = new URL(rawUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -28,7 +30,7 @@ public class Http {
             String message = conn.getResponseMessage();
 
             if (code == HttpURLConnection.HTTP_OK) {
-                return new InputStreamReader(new BufferedInputStream(conn.getInputStream()), "UTF-8");
+                return new Pair<>(new InputStreamReader(new BufferedInputStream(conn.getInputStream()), "UTF-8"), conn);
             }
         } catch (Exception e) {
             e.printStackTrace();

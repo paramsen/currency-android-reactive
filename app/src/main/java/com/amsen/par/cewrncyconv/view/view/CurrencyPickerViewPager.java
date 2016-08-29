@@ -1,33 +1,21 @@
 package com.amsen.par.cewrncyconv.view.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Region;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.amsen.par.cewrncyconv.R;
 import com.amsen.par.cewrncyconv.base.event.EventBus;
-import com.amsen.par.cewrncyconv.base.util.ViewUtils;
 import com.amsen.par.cewrncyconv.model.Currency;
 import com.amsen.par.cewrncyconv.view.CurrencyEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.amsen.par.cewrncyconv.base.util.ViewUtils.dpToPx;
+import static com.amsen.par.cewrncyconv.view.CurrencyEvent.Type.CHANGE_CURRENCY;
 
 /**
  * ViewPager that shows 3 Views at once. Encapsulates
@@ -46,12 +34,17 @@ public class CurrencyPickerViewPager extends ViewPager {
         setClipChildren(false);
         setOffscreenPageLimit(2);
         setAdapter(getCustomAdapter());
+        setPageTransformer(true, getPageTransformer());
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                eventBus.post(new CurrencyEvent<>(items.get(position).getId()));
+                eventBus.post(new CurrencyEvent<>(items.get(position), CHANGE_CURRENCY));
             }
         });
+    }
+
+    private PageTransformer getPageTransformer() {
+        return (page, position) -> page.setAlpha(Math.min((-Math.abs(position) * 1.2f) + 1, 1f));
     }
 
     public void applyItems(List<Currency> items) {
@@ -103,7 +96,7 @@ public class CurrencyPickerViewPager extends ViewPager {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    public void setEventBus(EventBus eventBus) {
+    public void applyEventBus(EventBus<CurrencyEvent> eventBus) {
         this.eventBus = eventBus;
     }
 }

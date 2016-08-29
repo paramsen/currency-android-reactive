@@ -7,6 +7,8 @@ import com.amsen.par.cewrncyconv.base.dependencies.AppGraph;
 import com.amsen.par.cewrncyconv.persistence.MockStorage;
 import com.amsen.par.cewrncyconv.source.CurrencySource;
 
+import java.util.Locale;
+
 /**
  * @author Pär Amsen 2016
  */

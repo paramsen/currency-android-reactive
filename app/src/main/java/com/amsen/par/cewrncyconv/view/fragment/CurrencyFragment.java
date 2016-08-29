@@ -6,15 +6,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.amsen.par.cewrncyconv.R;
 import com.amsen.par.cewrncyconv.base.dependencies.ViewGraph;
 import com.amsen.par.cewrncyconv.base.event.EventBus;
 import com.amsen.par.cewrncyconv.model.Currency;
 import com.amsen.par.cewrncyconv.source.CurrencySource;
+import com.amsen.par.cewrncyconv.view.CurrencyEvent;
 import com.amsen.par.cewrncyconv.view.activity.CurrencyActivity;
+import com.amsen.par.cewrncyconv.view.view.CurrencyEditText;
 import com.amsen.par.cewrncyconv.view.view.CurrencyPicker;
+import com.amsen.par.cewrncyconv.view.view.CurrencyTextView;
 
 import java.util.List;
 
@@ -27,11 +29,13 @@ import butterknife.ButterKnife;
 public class CurrencyFragment extends Fragment {
     @BindView(R.id.currencyPicker)
     CurrencyPicker currencyPicker;
-    @BindView(R.id.currencyInput)
-    EditText currencyInput;
+    @BindView(R.id.currencyEditText)
+    CurrencyEditText currencyEditText;
+    @BindView(R.id.currencyTextView)
+    CurrencyTextView currencyTextView;
 
     private CurrencySource source;
-    private EventBus eventBus;
+    private EventBus<CurrencyEvent> eventBus;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -40,8 +44,11 @@ public class CurrencyFragment extends Fragment {
         source = getViewGraph().currencySource;
         eventBus = getViewGraph().eventBus;
 
-        currencyPicker.setEventBus(eventBus);
-        currencyInput.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices..
+        currencyTextView.applyEventBus(eventBus);
+        currencyEditText.applyEventBus(eventBus);
+        currencyPicker.applyEventBus(eventBus);
+
+        currencyEditText.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices..
 
         initialState();
     }

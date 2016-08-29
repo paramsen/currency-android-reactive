@@ -21,32 +21,34 @@
         android:layout_marginTop="48dp"
         android:text="AUD" />
 
-    <EditText
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/currencyInput"
-        tools:style="@style/EditText"
+    <com.amsen.par.cewrncyconv.view.view.CurrencyEditText
+        android:id="@+id/currencyEditText"
+        style="@style/EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:hint="Amount" />
+        android:hint="Amount"
+        android:inputType="numberDecimal" />
 
     <com.amsen.par.cewrncyconv.view.view.CurrencyPicker
-        android:clipChildren="false"
         android:id="@+id/currencyPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:clipChildren="false"
         tools:layout_height="80dp" />
 
-    <TextView
+    <com.amsen.par.cewrncyconv.view.view.CurrencyTextView
+        android:id="@+id/currencyTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/text_size"
-        android:text="£2,456.78" />
+        android:text="£2,456.78"
+        android:textSize="@dimen/text_size" />
 
 </LinearLayout>
