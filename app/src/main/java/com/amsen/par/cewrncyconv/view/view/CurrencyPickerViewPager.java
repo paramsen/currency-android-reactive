@@ -1,5 +1,6 @@
 package com.amsen.par.cewrncyconv.view.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.amsen.par.cewrncyconv.base.event.EventBus;
+import com.amsen.par.cewrncyconv.base.util.ViewUtils;
 import com.amsen.par.cewrncyconv.model.Currency;
 import com.amsen.par.cewrncyconv.view.CurrencyEvent;
 
@@ -26,19 +28,27 @@ import static com.amsen.par.cewrncyconv.view.CurrencyEvent.Type.CHANGE_CURRENCY;
 public class CurrencyPickerViewPager extends ViewPager {
     private List<Currency> items;
     private EventBus<CurrencyEvent> eventBus;
+    private Activity activity;
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        activity = ViewUtils.getActivity(context);
         items = new ArrayList<>();
         setClipChildren(false);
-        setOffscreenPageLimit(2);
+        setOffscreenPageLimit(4);
         setAdapter(getCustomAdapter());
         setPageTransformer(true, getPageTransformer());
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 eventBus.post(new CurrencyEvent<>(items.get(position), CHANGE_CURRENCY));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                ViewUtils.hideKeyboard(activity);
             }
         });
     }
