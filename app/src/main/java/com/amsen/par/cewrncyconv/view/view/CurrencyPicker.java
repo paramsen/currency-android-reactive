@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.amsen.par.cewrncyconv.R;
+import com.amsen.par.cewrncyconv.model.Currency;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class CurrencyPicker extends FrameLayout {
         view.setClipChildren(false);
     }
 
-    public void applyItems(List<Integer> items) {
+    public void applyItems(List<Currency> items) {
         viewPager.applyItems(items);
     }
 }

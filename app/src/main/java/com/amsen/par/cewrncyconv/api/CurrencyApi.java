@@ -34,9 +34,11 @@ public class CurrencyApi {
 
                     while (jsonReader.hasNext()) {
                         String id = jsonReader.nextName();
-                        double rate = jsonReader.nextDouble();
-
-                        currencies.add(new Currency(id, rate));
+                        
+                        if(id.matches("CAD|EUR|GBP|JPY|USD")) {
+                            double rate = jsonReader.nextDouble();
+                            currencies.add(new Currency(id, rate));
+                        } else jsonReader.skipValue();
                     }
 
                     jsonReader.endObject();

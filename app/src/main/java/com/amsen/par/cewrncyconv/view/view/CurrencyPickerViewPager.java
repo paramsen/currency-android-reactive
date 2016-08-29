@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.amsen.par.cewrncyconv.R;
 import com.amsen.par.cewrncyconv.base.util.ViewUtils;
+import com.amsen.par.cewrncyconv.model.Currency;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import static com.amsen.par.cewrncyconv.base.util.ViewUtils.dpToPx;
  * @author Pär Amsen 2016
  */
 public class CurrencyPickerViewPager extends ViewPager {
-    private List<Integer> items;
+    private List<Currency> items;
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,7 +45,7 @@ public class CurrencyPickerViewPager extends ViewPager {
         setAdapter(getCustomAdapter());
     }
 
-    public void applyItems(List<Integer> items) {
+    public void applyItems(List<Currency> items) {
         this.items = items;
         getAdapter().notifyDataSetChanged();
         setCurrentItem(items.size() / 2);
@@ -65,7 +66,7 @@ public class CurrencyPickerViewPager extends ViewPager {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 TextView textView = new TextView(container.getContext());
-                textView.setText(position + "SEK");
+                textView.setText(items.get(position).getId());
                 textView.setTag(position);
                 container.addView(textView);
 

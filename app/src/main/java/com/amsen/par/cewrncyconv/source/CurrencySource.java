@@ -2,12 +2,11 @@ package com.amsen.par.cewrncyconv.source;
 
 import com.amsen.par.cewrncyconv.api.CurrencyApi;
 import com.amsen.par.cewrncyconv.base.functional.Action1;
+import com.amsen.par.cewrncyconv.base.functional.Async;
 import com.amsen.par.cewrncyconv.model.Currency;
 import com.amsen.par.cewrncyconv.persistence.Storage;
 
 import java.util.List;
-
-import static com.amsen.par.cewrncyconv.base.functional.Async.go;
 
 /**
  * A Source is a concept;
@@ -16,7 +15,7 @@ import static com.amsen.par.cewrncyconv.base.functional.Async.go;
  * data layer etc. You get the data through a Source
  * and you save it through one (or a Sink for that
  * matter).
- * <p>
+ *
  * Note separation of protected sync getCurrencies()
  * and public async version.
  *
@@ -25,6 +24,11 @@ import static com.amsen.par.cewrncyconv.base.functional.Async.go;
 public class CurrencySource {
     private CurrencyApi api;
     private Storage<Currency> cache;
+
+    public CurrencySource(CurrencyApi api, Storage<Currency> cache) {
+        this.api = api;
+        this.cache = cache;
+    }
 
     protected List<Currency> getCurrencies() {
         List<Currency> currencies = cache.getAll();
@@ -38,11 +42,11 @@ public class CurrencySource {
 
     /**
      * Async version. Looks proper in Java8. Better in
-     * RxJava. In "vanilla" Android I keep async details
+     * RxJava. In "vanilla" Android I keep async impl details
      * in the Source layer [when possible], it's quite simple
-     * this way.
+     * to understand and test this way.
      */
     public void getCurrencies(Action1<List<Currency>> callback) {
-        go(this::getCurrencies, callback);
+        Async.go(this::getCurrencies, callback);
     }
 }
