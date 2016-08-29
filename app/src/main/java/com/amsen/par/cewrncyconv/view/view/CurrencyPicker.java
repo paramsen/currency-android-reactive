@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class CurrencyPicker extends ViewPager {
             public Object instantiateItem(ViewGroup container, int position) {
                 TextView textView = new TextView(getContext());
                 textView.setText(position + "SEK");
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32);
                 textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 textView.setTag(position);
@@ -68,14 +70,15 @@ public class CurrencyPicker extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         View childAt = getChildAt(0);
 
         if (childAt != null) {
             childAt.measure(widthMeasureSpec, heightMeasureSpec);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(childAt.getMeasuredHeight(), MeasureSpec.EXACTLY); //make ViewPager wrap_content of child
             int measuredWidth = childAt.getMeasuredWidth();
-            setPageMargin((int) (-measuredWidth * .666f)); // show three views at once
+            setPageMargin((int) (-measuredWidth * .666f)); // show three views at once in ViewPager
         }
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
