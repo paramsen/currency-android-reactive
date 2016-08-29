@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,38 +12,41 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:text="CASH MONEY ™"
-        android:textSize="24sp" />
+        android:textSize="@dimen/text_size_logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="48dp"
-        android:text="AUD"
-        android:textSize="56sp" />
+        android:text="AUD" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/currencyInput"
+        tools:style="@style/EditText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:hint="Amount"
-        android:textSize="56sp" />
+        android:hint="Amount" />
 
     <com.amsen.par.cewrncyconv.view.view.CurrencyPicker
+        android:clipChildren="false"
         android:id="@+id/currencyPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        tools:background="#EEE"
-        tools:layout_height="80dp"/>
+        tools:layout_height="80dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
-            android:textSize="56sp"
-            tools:text="£2,456.78" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size"
+        android:text="£2,456.78" />
 
 </LinearLayout>

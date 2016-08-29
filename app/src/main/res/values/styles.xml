@@ -6,6 +6,34 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:textViewStyle">@style/TextView</item>
+        <item name="editTextStyle">@style/EditText</item>
     </style>
 
+    <style name="TextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextView.CurrencyPicker">
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/whiteHint</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CurrencyPicker">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
 </resources>

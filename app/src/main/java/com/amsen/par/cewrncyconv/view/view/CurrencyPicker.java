@@ -1,84 +1,54 @@
 package com.amsen.par.cewrncyconv.view.view;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
-import java.util.ArrayList;
+import com.amsen.par.cewrncyconv.R;
+
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
- * ViewPager that shows 3 Views at once. Encapsulates
- * all UI logic for the currency picker.
- *
  * @author Pär Amsen 2016
  */
-public class CurrencyPicker extends ViewPager {
-    private List<Integer> items;
+public class CurrencyPicker extends FrameLayout {
+    @BindView(R.id.viewPager)
+    CurrencyPickerViewPager viewPager;
+
+    public CurrencyPicker(Context context) {
+        super(context);
+        init(context);
+    }
 
     public CurrencyPicker(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+    }
 
-        items = new ArrayList<>();
-        setOffscreenPageLimit(2);
-        setAdapter(getCustomAdapter());
+    public CurrencyPicker(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    public CurrencyPicker(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+    }
+
+    private void init(Context context) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_currency_picker, this, true);
+        ButterKnife.bind(this, view);
+        setClipChildren(false);
+        view.setClipChildren(false);
     }
 
     public void applyItems(List<Integer> items) {
-        this.items = items;
-        getAdapter().notifyDataSetChanged();
-        setCurrentItem(items.size() / 2);
-    }
-
-    private PagerAdapter getCustomAdapter() {
-        return new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return items.size();
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return (int) view.getTag() == (int) object;
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                TextView textView = new TextView(getContext());
-                textView.setText(position + "SEK");
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 32);
-                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                textView.setGravity(Gravity.CENTER_HORIZONTAL);
-                textView.setTag(position);
-                container.addView(textView);
-
-                return position;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(container.findViewWithTag(position));
-            }
-        };
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        View childAt = getChildAt(0);
-
-        if (childAt != null) {
-            childAt.measure(widthMeasureSpec, heightMeasureSpec);
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(childAt.getMeasuredHeight(), MeasureSpec.EXACTLY); //make ViewPager wrap_content of child
-            int measuredWidth = childAt.getMeasuredWidth();
-            setPageMargin((int) (-measuredWidth * .666f)); // show three views at once in ViewPager
-        }
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        viewPager.applyItems(items);
     }
 }
