@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.amsen.par.cewrncyconv.R;
 import com.amsen.par.cewrncyconv.base.dependencies.ViewGraph;
+import com.amsen.par.cewrncyconv.base.event.EventBus;
 import com.amsen.par.cewrncyconv.model.Currency;
 import com.amsen.par.cewrncyconv.source.CurrencySource;
 import com.amsen.par.cewrncyconv.view.activity.CurrencyActivity;
@@ -30,14 +31,17 @@ public class CurrencyFragment extends Fragment {
     EditText currencyInput;
 
     private CurrencySource source;
+    private EventBus eventBus;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         source = getViewGraph().currencySource;
+        eventBus = getViewGraph().eventBus;
 
-        currencyInput.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices. One would be smart to avoid this.
+        currencyPicker.setEventBus(eventBus);
+        currencyInput.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices..
 
         initialState();
     }

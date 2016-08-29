@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.amsen.par.cewrncyconv.R;
+import com.amsen.par.cewrncyconv.base.event.EventBus;
 import com.amsen.par.cewrncyconv.model.Currency;
 
 import java.util.List;
@@ -45,11 +46,13 @@ public class CurrencyPicker extends FrameLayout {
     private void init(Context context) {
         ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_currency_picker, this, true);
         ButterKnife.bind(this, view);
-        setClipChildren(false);
-        view.setClipChildren(false);
     }
 
     public void applyItems(List<Currency> items) {
         viewPager.applyItems(items);
+    }
+
+    public void setEventBus(EventBus eventBus) {
+        viewPager.setEventBus(eventBus);
     }
 }

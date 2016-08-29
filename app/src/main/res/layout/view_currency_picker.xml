@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_height="80dp"
-    android:clipChildren="false">
+    tools:layout_height="80dp">
     <com.amsen.par.cewrncyconv.view.view.CurrencyPickerViewPager
         style="@style/CurrencyPicker"
         android:id="@+id/viewPager"
