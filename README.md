@@ -6,7 +6,8 @@ _[Vanilla Android, no 3rd party libraries or frameworks]_
 * Custom views and aggressive encapsulation. React -like architecture with View components.
 * Architecture loosely based on Fowlers Uncle Bobs Clean Architecture.
 * Functional approach to the problems of asynchronisity in Android. Think RxJava, in fact, use RxJava. I would if this wasn't a vanilla Android project.
-* Why haven't I just used RxJava? Because everyone in Australia is like "Oh, so you don't know Android??? You use new cool frameworks huh? You use libraries that promotes testable, clean asynchronous code? That must be bad!". Seriously Aussies, when you catch up with Europe, look at this repo instead;
+* Why haven't I just used RxJava?  Well, because in Australia, where I reside at the time of this readmes birth, no one likes RxJava or RxAnything. Aussies think safe, but RxJava is awesome. It is scary. It changes the game. Suddenly all the apps that you had to be senior to write are quite easy. All the senior problems of concurrency are solved. That really frightens people.
+* RxJava, Dagger & awesomness version of this project; 
 
 ## Architectural info
 Inspired by DDD, Fowler and React.
