@@ -1,5 +1,5 @@
 # Cewlrency, a currency converter built in Android
-_[Built on RxJava, fueled by awesomness and 🤓-iness]_
+_[Built on RxJava, fueled by awesomness and 🤓-iness]_  
 __This is a fork of my other currency app; https://github.com/paramsen/currency-android-vanilla__
 ## Features
 * Custom views and aggressive encapsulation. React -like architecture with View components.
