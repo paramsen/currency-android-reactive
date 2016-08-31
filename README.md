@@ -1,4 +1,5 @@
-# Android project _[Vanilla Android, no 3rd party libraries or frameworks]_
+# Android project
+_[Vanilla Android, no 3rd party libraries or frameworks]_
 ## Currency Converter
 
 ## Features
