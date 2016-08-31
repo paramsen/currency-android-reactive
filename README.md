@@ -1,8 +1,11 @@
-# currency-converter-29-08-2016
-Pretty little currency converter (another Android test project)
+# Android project _[Vanilla Android, no 3rd party libraries or frameworks]_
+## Currency Converter
 
+## Features
+* Custom views and aggressive encapsulation. React -like architecture with View components.
 * Architecture loosely based on Fowlers Uncle Bobs Clean Architecture.
-* Use the concepts introduced for your own projects. Consider using RxJava to rid the awkwardness of Android.
+* Functional approach to the problems of asynchronisity in Android. Think RxJava, in fact, use RxJava. I would if this wasn't a vanilla Android project.
+* Why haven't I just used RxJava? Because everyone in Australia is like "Oh, so you don't know Android??? You use new cool frameworks huh? You use libraries that promotes testable, clean asynchronous code? That must be bad!". Seriously Aussies, when you catch up with Europe, look at this repo instead;
 
 ## Architectural info
 Inspired by DDD, Fowler and React.
