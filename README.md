@@ -1,7 +1,7 @@
 # Cewlrency, a currency converter built in Android
 _[Built on RxJava, fueled by awesomness and 🤓-iness]_  
 
-__This is a fork of my other currency app ([HERE](https://github.com/paramsen/currency-android-vanilla "HERE"))__
+__This is a rewrite of my other currency app [HERE](https://github.com/paramsen/currency-android-vanilla "HERE")__
 
 ## Features
 * Cool concurrency fueled by Rx. The kind that you just can't build with AsyncTasks, the kind without callback hell. Yup.
