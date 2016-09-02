@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.amsen.par.cewlrency.base.event.EventBus;
+import com.amsen.par.cewlrency.base.rx.event.EventStream;
+import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
 
@@ -14,6 +15,8 @@ import java.text.NumberFormat;
  * @author Pär Amsen 2016
  */
 public class CurrencyTextView extends TextView {
+    private EventStream eventStream;
+
     private Currency currency;
     private double amount;
 
@@ -33,8 +36,10 @@ public class CurrencyTextView extends TextView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void applyEventBus(EventBus<CurrencyEvent> eventBus) {
-        eventBus.subscribe(this::onAmountChanged);
+    private void init() {
+        eventStream.stream()
+                .cast(CurrencyEvent.class)
+                .subscribe(SubscriberUtils.onNext(this::onAmountChanged));
     }
 
     private void onAmountChanged(CurrencyEvent currencyEvent) {

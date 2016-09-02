@@ -1,6 +1,6 @@
 package com.amsen.par.cewlrency.view;
 
-import com.amsen.par.cewlrency.base.event.Event;
+import com.amsen.par.cewlrency.base.rx.event.Event;
 
 /**
  * @author Pär Amsen 2016

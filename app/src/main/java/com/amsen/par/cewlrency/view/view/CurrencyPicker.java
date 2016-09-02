@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.amsen.par.cewlrency.R;
-import com.amsen.par.cewlrency.base.event.EventBus;
 import com.amsen.par.cewlrency.model.Currency;
-import com.amsen.par.cewlrency.view.CurrencyEvent;
 
 import java.util.List;
 
@@ -53,9 +51,5 @@ public class CurrencyPicker extends FrameLayout {
 
     public void applyItems(List<Currency> items) {
         viewPager.applyItems(items);
-    }
-
-    public void applyEventBus(EventBus<CurrencyEvent> eventBus) {
-        viewPager.applyEventBus(eventBus);
     }
 }

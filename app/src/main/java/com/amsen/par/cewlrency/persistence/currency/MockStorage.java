@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -16,6 +18,7 @@ import rx.Observable;
 public class MockStorage implements CurrencyStorage {
     private HashMap<String, Currency> storage;
 
+    @Inject
     public MockStorage() {
         storage = new HashMap<>();
     }

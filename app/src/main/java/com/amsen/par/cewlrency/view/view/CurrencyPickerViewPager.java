@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.amsen.par.cewlrency.base.event.EventBus;
+import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
@@ -27,7 +27,7 @@ import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY;
  */
 public class CurrencyPickerViewPager extends ViewPager {
     private List<Currency> items;
-    private EventBus<CurrencyEvent> eventBus;
+    private EventStream eventStream;
     private Activity activity;
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
@@ -42,7 +42,7 @@ public class CurrencyPickerViewPager extends ViewPager {
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                eventBus.post(new CurrencyEvent<>(items.get(position), CHANGE_CURRENCY));
+                eventStream.post(new CurrencyEvent<>(items.get(position), CHANGE_CURRENCY));
             }
 
             @Override
@@ -104,9 +104,5 @@ public class CurrencyPickerViewPager extends ViewPager {
         }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    public void applyEventBus(EventBus<CurrencyEvent> eventBus) {
-        this.eventBus = eventBus;
     }
 }

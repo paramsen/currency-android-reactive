@@ -6,7 +6,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-import com.amsen.par.cewlrency.base.event.EventBus;
+import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
 
 import java.text.DecimalFormat;
@@ -16,7 +16,7 @@ import java.text.DecimalFormatSymbols;
  * @author Pär Amsen 2016
  */
 public class CurrencyEditText extends EditText {
-    private EventBus<CurrencyEvent> eventBus;
+    private EventStream eventStream;
 
     public CurrencyEditText(Context context) {
         super(context);
@@ -59,7 +59,7 @@ public class CurrencyEditText extends EditText {
                     e.printStackTrace();
                 }
 
-                eventBus.post(new CurrencyEvent<>(value, CurrencyEvent.Type.CHANGE_AMOUNT));
+                eventStream.post(new CurrencyEvent<>(value, CurrencyEvent.Type.CHANGE_AMOUNT));
 
                 try {
                     String formatted = DecimalFormat.getInstance().format(value);
@@ -72,9 +72,5 @@ public class CurrencyEditText extends EditText {
                 }
             }
         });
-    }
-
-    public void applyEventBus(EventBus<CurrencyEvent> eventBus) {
-        this.eventBus = eventBus;
     }
 }

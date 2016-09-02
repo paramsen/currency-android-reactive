@@ -5,28 +5,26 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.amsen.par.cewlrency.R;
-import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
-import com.amsen.par.cewlrency.source.CurrencySource;
-import com.amsen.par.cewlrency.view.fragment.CurrencyFragment;
+import com.amsen.par.cewlrency.base.CurrencyApplication;
+import com.amsen.par.cewlrency.base.dependency.view.ViewComponent;
+import com.amsen.par.cewlrency.base.dependency.view.ViewModule;
 
-import javax.inject.Inject;
-
-public class CurrencyActivity extends AppCompatActivity {
-    @Inject
-    CurrencySource source;
+public abstract class BaseActivity extends AppCompatActivity {
+    private ViewComponent component;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initialState();
+        _inject();
+        inject();
     }
 
-    private void initialState() {
-        source.getCurrencies()
-                .subscribe(SubscriberUtils.onNext(e -> showFragment(new CurrencyFragment())));
+    private void _inject() {
+        component = ((CurrencyApplication) getApplication()).getApplicationComponent().plus(new ViewModule(this));
+        component.inject(this);
     }
+
+    public abstract void inject();
 
     public void showFragment(Fragment fragment) {
         getSupportFragmentManager()

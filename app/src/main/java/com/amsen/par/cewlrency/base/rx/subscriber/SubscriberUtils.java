@@ -1,4 +1,4 @@
-package com.amsen.par.cewlrency.base.subscriber;
+package com.amsen.par.cewlrency.base.rx.subscriber;
 
 import rx.Subscriber;
 import rx.functions.Action0;
