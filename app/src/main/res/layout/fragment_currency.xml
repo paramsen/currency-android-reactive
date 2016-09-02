@@ -22,7 +22,7 @@
         android:layout_marginTop="48dp"
         android:text="AUD" />
 
-    <com.amsen.par.cewrncyconv.view.view.CurrencyEditText
+    <com.amsen.par.cewlrency.view.view.CurrencyEditText
         android:id="@+id/currencyEditText"
         style="@style/EditText"
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         android:hint="Amount"
         android:inputType="numberDecimal" />
 
-    <com.amsen.par.cewrncyconv.view.view.CurrencyPicker
+    <com.amsen.par.cewlrency.view.view.CurrencyPicker
         android:id="@+id/currencyPicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:clipChildren="false"
         tools:layout_height="80dp" />
 
-    <com.amsen.par.cewrncyconv.view.view.CurrencyTextView
+    <com.amsen.par.cewlrency.view.view.CurrencyTextView
         android:id="@+id/currencyTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
