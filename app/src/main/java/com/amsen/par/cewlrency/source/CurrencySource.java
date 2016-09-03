@@ -1,14 +1,13 @@
 package com.amsen.par.cewlrency.source;
 
 import com.amsen.par.cewlrency.api.fixerio.FixerIoResource.ApiAccess;
+import com.amsen.par.cewlrency.api.fixerio.model.CurrencyRateRespModel;
 import com.amsen.par.cewlrency.api.fixerio.response.CurrencyExchangeRatesResponse;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.persistence.currency.CurrencyStorage;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import retrofit2.Response;
 import rx.Observable;
@@ -37,13 +36,32 @@ public class CurrencySource {
                 .switchIfEmpty(fromApi());
     }
 
+    public Observable<Currency> getCurrency(String id) {
+        return cache.get(id)
+                .switchIfEmpty(fromApi().flatMap(Observable::from).filter(e -> e.getId().equals(id)).first());
+    }
+
     protected Observable<List<Currency>> fromApi() {
         return api.getCurrencyExchangeRates()
+                .map(Response::body)
                 .map(this::transform)
+                .map(this::addBase)
                 .doOnNext(cache::put);
     }
 
-    private List<Currency> transform(Response<CurrencyExchangeRatesResponse> resp) {
-        return Collections.emptyList();
+    private List<Currency> addBase(List<Currency> currencies) {
+        currencies.add(new Currency(Currency.BASE_ID, 1.0, java.util.Currency.getInstance(Currency.BASE_ID)));
+
+        return currencies;
+    }
+
+    private List<Currency> transform(CurrencyExchangeRatesResponse resp) {
+        List<Currency> currencies = new ArrayList<>();
+
+        for (CurrencyRateRespModel model : resp.getRates()) {
+            currencies.add(new Currency(model.id, model.value, java.util.Currency.getInstance(model.id)));
+        }
+
+        return currencies;
     }
 }

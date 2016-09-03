@@ -4,7 +4,7 @@ import com.amsen.par.cewlrency.view.activity.BaseActivity;
 import com.amsen.par.cewlrency.view.activity.CurrencyActivity;
 import com.amsen.par.cewlrency.view.fragment.BaseFragment;
 import com.amsen.par.cewlrency.view.fragment.CurrencyFragment;
-import com.amsen.par.cewlrency.view.view.CurrencyEditText;
+import com.amsen.par.cewlrency.view.view.CurrencyInput;
 import com.amsen.par.cewlrency.view.view.CurrencyPickerViewPager;
 import com.amsen.par.cewlrency.view.view.CurrencyTextView;
 
@@ -23,5 +23,5 @@ public interface ViewComponent {
 
     void inject(CurrencyPickerViewPager view);
     void inject(CurrencyTextView view);
-    void inject(CurrencyEditText view);
+    void inject(CurrencyInput view);
 }

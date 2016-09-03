@@ -1,6 +1,5 @@
 package com.amsen.par.cewlrency.view.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,7 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY;
+import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY_TO;
 
 /**
  * ViewPager that shows 3 Views at once. Encapsulates
@@ -34,6 +33,7 @@ public class CurrencyPickerViewPager extends ViewPager {
 
     private List<Currency> items;
     private BaseActivity activity;
+    private CurrencyEvent.Type eventType;
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,7 +48,7 @@ public class CurrencyPickerViewPager extends ViewPager {
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                eventStream.post(new CurrencyEvent<>(items.get(position), CHANGE_CURRENCY));
+                eventStream.post(new CurrencyEvent<>(items.get(position), eventType));
             }
 
             @Override
@@ -61,6 +61,10 @@ public class CurrencyPickerViewPager extends ViewPager {
 
     private PageTransformer getPageTransformer() {
         return (page, position) -> page.setAlpha(Math.min((-Math.abs(position) * 1.2f) + 1, 1f));
+    }
+
+    public void setEventType(CurrencyEvent.Type eventType) {
+        this.eventType = eventType;
     }
 
     public void applyItems(List<Currency> items) {
@@ -104,7 +108,7 @@ public class CurrencyPickerViewPager extends ViewPager {
 
         if (childAt != null) {
             childAt.measure(widthMeasureSpec, heightMeasureSpec);
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(childAt.getMeasuredHeight() + getPaddingBottom() + getPaddingTop() , MeasureSpec.EXACTLY); //make ViewPager wrap_content of child
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(childAt.getMeasuredHeight() + getPaddingBottom() + getPaddingTop(), MeasureSpec.EXACTLY); //make ViewPager wrap_content of child
             int measuredWidth = childAt.getMeasuredWidth();
             setPageMargin((int) (-measuredWidth * .666f)); // show three views at once in ViewPager
         }

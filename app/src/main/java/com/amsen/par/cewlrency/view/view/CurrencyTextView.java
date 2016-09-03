@@ -6,12 +6,11 @@ import android.widget.TextView;
 
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
+import com.amsen.par.cewlrency.base.util.CurrencyUtil;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
+import com.amsen.par.cewlrency.source.CurrencySource;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
-import com.amsen.par.cewlrency.view.activity.BaseActivity;
-
-import java.text.NumberFormat;
 
 import javax.inject.Inject;
 
@@ -23,8 +22,12 @@ import rx.android.schedulers.AndroidSchedulers;
 public class CurrencyTextView extends TextView {
     @Inject
     EventStream eventStream;
+    @Inject
+    CurrencySource source;
 
-    private Currency currency;
+    private Currency currencyFrom;
+    private Currency currencyTo;
+    private Currency baseCurrency;
     private double amount;
 
     public CurrencyTextView(Context context) {
@@ -44,6 +47,17 @@ public class CurrencyTextView extends TextView {
 
     private void init(Context context) {
         ViewUtils.getBaseActivity(context).getComponent().inject(this);
+        initialState();
+    }
+
+    private void initialState() {
+        source.getCurrency(Currency.BASE_ID)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(SubscriberUtils.onNext(this::onBaseCurrency));
+    }
+
+    private void onBaseCurrency(Currency baseCurrency) {
+        this.baseCurrency = baseCurrency;
         initBehavior();
     }
 
@@ -55,15 +69,19 @@ public class CurrencyTextView extends TextView {
     }
 
     private void onAmountChanged(CurrencyEvent currencyEvent) {
-        if(currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY) {
-            currency = (Currency) currencyEvent.value;
+        if(currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_FROM) {
+            currencyFrom = (Currency) currencyEvent.value;
+        } else if(currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_TO) {
+            currencyTo = (Currency) currencyEvent.value;
         } else {
             amount = (double) currencyEvent.value;
         }
 
-        if(currency != null) {
-            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(currency.getLocale());
-            setText(currencyFormatter.format(amount * currency.getRate()));
+        if(currencyTo != null) {
+            double multiplier = baseCurrency.getRate() / currencyFrom.getRate();
+            double conversionRate = currencyTo.getRate() * multiplier;
+
+            setText(CurrencyUtil.format(currencyTo.getCurrency(), amount * conversionRate));
         }
     }
 }

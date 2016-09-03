@@ -15,28 +15,25 @@
         android:text="CASH MONEY ™"
         android:textSize="@dimen/text_size_logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.amsen.par.cewlrency.view.view.CurrencyPicker
+        android:id="@+id/currencyPickerFrom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:text="AUD" />
+        android:layout_marginTop="32dp"
+        android:clipChildren="false"
+        tools:layout_height="80dp" />
 
-    <com.amsen.par.cewlrency.view.view.CurrencyEditText
+    <com.amsen.par.cewlrency.view.view.CurrencyInput
         android:id="@+id/currencyEditText"
-        style="@style/EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:hint="Amount"
-        android:inputType="numberDecimal" />
+        android:layout_marginTop="16dp" />
 
     <com.amsen.par.cewlrency.view.view.CurrencyPicker
-        android:id="@+id/currencyPicker"
+        android:id="@+id/currencyPickerTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

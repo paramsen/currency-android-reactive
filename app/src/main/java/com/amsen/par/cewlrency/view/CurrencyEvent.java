@@ -7,7 +7,7 @@ import com.amsen.par.cewlrency.base.rx.event.Event;
  */
 public class CurrencyEvent<E> implements Event {
     public enum Type {
-        CHANGE_CURRENCY, CHANGE_AMOUNT
+        CHANGE_CURRENCY_FROM, CHANGE_CURRENCY_TO, CHANGE_AMOUNT
     }
 
     public CurrencyEvent(E value, Type type) {

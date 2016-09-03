@@ -2,20 +2,19 @@ package com.amsen.par.cewlrency.model;
 
 import android.support.annotation.NonNull;
 
-import java.util.Locale;
-
 /**
  * @author Pär Amsen 2016
  */
 public class Currency implements Comparable<Currency> {
+    public static final String BASE_ID = "SEK";
     private String id;
     private double rate;
-    private Locale locale;
+    private java.util.Currency currency;
 
-    public Currency(String id, double rate, Locale locale) {
+    public Currency(String id, double rate, java.util.Currency currency) {
         this.id = id;
         this.rate = rate;
-        this.locale = locale;
+        this.currency = currency;
     }
 
     public String getId() {
@@ -34,12 +33,12 @@ public class Currency implements Comparable<Currency> {
         this.rate = rate;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public java.util.Currency getCurrency() {
+        return currency;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public void setCurrency(java.util.Currency currency) {
+        this.currency = currency;
     }
 
     @Override
