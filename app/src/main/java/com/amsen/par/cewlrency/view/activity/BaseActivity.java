@@ -24,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         component.inject(this);
     }
 
-    public abstract void inject();
+    protected abstract void inject();
 
     public void showFragment(Fragment fragment) {
         getSupportFragmentManager()
@@ -32,5 +32,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.fragments, fragment)
                 .commit();
+    }
+
+    public ViewComponent getComponent() {
+        return component;
     }
 }

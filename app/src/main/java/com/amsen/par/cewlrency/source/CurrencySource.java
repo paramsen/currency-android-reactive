@@ -1,13 +1,14 @@
 package com.amsen.par.cewlrency.source;
 
-import com.amsen.par.cewlrency.api.fixerio.FixerIoResource;
 import com.amsen.par.cewlrency.api.fixerio.FixerIoResource.ApiAccess;
-import com.amsen.par.cewlrency.api.fixerio.response.ExchangeRateResponse;
+import com.amsen.par.cewlrency.api.fixerio.response.CurrencyExchangeRatesResponse;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.persistence.currency.CurrencyStorage;
 
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Response;
 import rx.Observable;
@@ -37,12 +38,12 @@ public class CurrencySource {
     }
 
     protected Observable<List<Currency>> fromApi() {
-        return api.getExchangeRates()
+        return api.getCurrencyExchangeRates()
                 .map(this::transform)
                 .doOnNext(cache::put);
     }
 
-    private List<Currency> transform(Response<ExchangeRateResponse> resp) {
+    private List<Currency> transform(Response<CurrencyExchangeRatesResponse> resp) {
         return Collections.emptyList();
     }
 }

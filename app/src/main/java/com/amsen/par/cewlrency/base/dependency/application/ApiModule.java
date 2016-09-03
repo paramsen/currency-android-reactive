@@ -1,6 +1,7 @@
 package com.amsen.par.cewlrency.base.dependency.application;
 
 import com.amsen.par.cewlrency.BuildConfig;
+import com.amsen.par.cewlrency.api.fixerio.response.CurrencyExchangeRatesResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -55,11 +56,15 @@ public class ApiModule {
     @Provides
     public Retrofit provideRetrofit(Gson gson) {
         return new Retrofit.Builder()
-                .baseUrl("http://url")
+                .baseUrl("http://api.fixer.io")
                 .addConverterFactory(new Converter.Factory() {
                     @Override
                     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-                        return super.responseBodyConverter(type, annotations, retrofit);
+                        if(type == CurrencyExchangeRatesResponse.class) {
+                            return value -> CurrencyExchangeRatesResponse.parse(value.byteStream());
+                        }
+
+                        return null; //leave conversion to GSON
                     }
                 })
                 .addConverterFactory(GsonConverterFactory.create(gson))

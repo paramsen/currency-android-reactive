@@ -2,7 +2,6 @@ package com.amsen.par.cewlrency.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,17 @@ import com.amsen.par.cewlrency.view.view.CurrencyTextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author Pär Amsen 2016
  */
-public class CurrencyFragment extends Fragment {
+public class CurrencyFragment extends BaseFragment {
+    @Inject
+    CurrencySource source;
+
     @BindView(R.id.currencyPicker)
     CurrencyPicker currencyPicker;
     @BindView(R.id.currencyEditText)
@@ -31,16 +34,17 @@ public class CurrencyFragment extends Fragment {
     @BindView(R.id.currencyTextView)
     CurrencyTextView currencyTextView;
 
-    private CurrencySource source;
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
-        currencyEditText.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices..
-
+        getBaseActivity().getComponent().inject(this);
+        setupViews();
         initialState();
+    }
+
+    private void setupViews() {
+        currencyEditText.setLayerType(View.LAYER_TYPE_SOFTWARE, null); //Android does not allow dashed strokes on accelerated devices..
     }
 
     private void initialState() {

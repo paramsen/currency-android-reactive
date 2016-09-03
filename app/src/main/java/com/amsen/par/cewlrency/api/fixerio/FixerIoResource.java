@@ -1,6 +1,6 @@
 package com.amsen.par.cewlrency.api.fixerio;
 
-import com.amsen.par.cewlrency.api.fixerio.response.ExchangeRateResponse;
+import com.amsen.par.cewlrency.api.fixerio.response.CurrencyExchangeRatesResponse;
 
 import javax.inject.Inject;
 
@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
 public class FixerIoResource {
     protected interface ApiInterface {
         @GET("latest")
-        Observable<Response<ExchangeRateResponse>> getExchangeRates(@Query("base") String base);
+        Observable<Response<CurrencyExchangeRatesResponse>> getCurrencyExchangeRates(@Query("base") String base);
     }
 
     public static class ApiAccess {
@@ -28,8 +28,8 @@ public class FixerIoResource {
             api = rf.create(ApiInterface.class);
         }
 
-        public Observable<Response<ExchangeRateResponse>> getExchangeRates() {
-            return api.getExchangeRates("SEK")
+        public Observable<Response<CurrencyExchangeRatesResponse>> getCurrencyExchangeRates() {
+            return api.getCurrencyExchangeRates("SEK")
                     .subscribeOn(Schedulers.io());
         }
     }

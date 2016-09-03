@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.amsen.par.cewlrency.R;
+import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 
 import java.util.List;
@@ -45,8 +46,9 @@ public class CurrencyPicker extends FrameLayout {
     }
 
     private void init(Context context) {
-        ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_currency_picker, this, true);
-        ButterKnife.bind(this, view);
+        ViewUtils.inflate(context, R.layout.view_currency_picker, this, true, (activity, view) -> {
+            ButterKnife.bind(this, view);
+        });
     }
 
     public void applyItems(List<Currency> items) {

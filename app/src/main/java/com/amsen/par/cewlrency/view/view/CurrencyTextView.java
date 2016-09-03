@@ -6,38 +6,50 @@ import android.widget.TextView;
 
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
+import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import java.text.NumberFormat;
+
+import javax.inject.Inject;
+
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * @author Pär Amsen 2016
  */
 public class CurrencyTextView extends TextView {
-    private EventStream eventStream;
+    @Inject
+    EventStream eventStream;
 
     private Currency currency;
     private double amount;
 
     public CurrencyTextView(Context context) {
         super(context);
+        init(context);
     }
 
     public CurrencyTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
 
     public CurrencyTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
     }
 
-    public CurrencyTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+    private void init(Context context) {
+        ViewUtils.getBaseActivity(context).getComponent().inject(this);
+        initBehavior();
     }
 
-    private void init() {
+    private void initBehavior() {
         eventStream.stream()
+                .filter(e -> e instanceof CurrencyEvent)
                 .cast(CurrencyEvent.class)
                 .subscribe(SubscriberUtils.onNext(this::onAmountChanged));
     }

@@ -7,38 +7,48 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
+import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import javax.inject.Inject;
+
 /**
  * @author Pär Amsen 2016
  */
 public class CurrencyEditText extends EditText {
-    private EventStream eventStream;
+    @Inject
+    EventStream eventStream;
 
     public CurrencyEditText(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public CurrencyEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public CurrencyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
     public CurrencyEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
+        ViewUtils.getBaseActivity(context).getComponent().inject(this);
+
+        initBehavior();
+    }
+
+    private void initBehavior() {
         addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,6 +79,7 @@ public class CurrencyEditText extends EditText {
                         setSelection(getText().toString().length());
                     }
                 } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
             }
         });

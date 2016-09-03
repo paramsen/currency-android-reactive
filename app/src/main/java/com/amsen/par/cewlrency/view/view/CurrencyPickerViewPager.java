@@ -13,9 +13,12 @@ import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY;
 
@@ -26,14 +29,17 @@ import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY;
  * @author Pär Amsen 2016
  */
 public class CurrencyPickerViewPager extends ViewPager {
+    @Inject
+    EventStream eventStream;
+
     private List<Currency> items;
-    private EventStream eventStream;
-    private Activity activity;
+    private BaseActivity activity;
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        activity = ViewUtils.getBaseActivity(context);
+        activity.getComponent().inject(this);
 
-        activity = ViewUtils.getActivity(context);
         items = new ArrayList<>();
         setClipChildren(false);
         setOffscreenPageLimit(4);

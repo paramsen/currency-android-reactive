@@ -11,7 +11,9 @@ import com.amsen.par.cewlrency.view.fragment.CurrencyFragment;
 
 import javax.inject.Inject;
 
-public class CurrencyActivity extends AppCompatActivity {
+import rx.android.schedulers.AndroidSchedulers;
+
+public class CurrencyActivity extends BaseActivity {
     @Inject
     CurrencySource source;
 
@@ -23,16 +25,14 @@ public class CurrencyActivity extends AppCompatActivity {
         initialState();
     }
 
-    private void initialState() {
-        source.getCurrencies()
-                .subscribe(SubscriberUtils.onNext(e -> showFragment(new CurrencyFragment())));
+    @Override
+    protected void inject() {
+        getComponent().inject(this);
     }
 
-    public void showFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.fragments, fragment)
-                .commit();
+    private void initialState() {
+        source.getCurrencies()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(SubscriberUtils.onNext(e -> showFragment(new CurrencyFragment())));
     }
 }
