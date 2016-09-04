@@ -3,9 +3,12 @@ package com.amsen.par.cewlrency.view.view;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 
 import com.amsen.par.cewlrency.R;
+import com.amsen.par.cewlrency.analytics.Analytics;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
@@ -27,6 +30,8 @@ public class FavoriteFAB extends FloatingActionButton {
     EventStream eventStream;
     @Inject
     PreferencesSource preferencesSource;
+    @Inject
+    Analytics analytics;
 
     private Currency from;
     private Currency to;
@@ -51,15 +56,18 @@ public class FavoriteFAB extends FloatingActionButton {
         String fromId = preferencesSource.<String>get(PreferencesHelper.CURRENCY_FROM);
         String toId = preferencesSource.<String>get(PreferencesHelper.CURRENCY_TO);
 
-        if(!fromId.equals(from.getId()) || !toId.equals(to.getId())) {
+        if (fromId == null || toId == null || (!fromId.equals(from.getId()) || !toId.equals(to.getId()))) {
             preferencesSource.put(PreferencesHelper.CURRENCY_FROM, from.getId());
             preferencesSource.put(PreferencesHelper.CURRENCY_TO, to.getId());
 
             onFavoriteConversion();
 
             Snackbar.make(this, getResources().getString(R.string.ARG1_to_ARG2_set_as_your_standard_conversion, from.getId(), to.getId()), Snackbar.LENGTH_LONG).show();
+
+            analytics.newFavourite(from.getId(), to.getId());
         } else {
             Snackbar.make(this, R.string.This_is_already_your_standard_conversion, Snackbar.LENGTH_LONG).show();
+            analytics.alreadyChosenFavourite(fromId, toId);
         }
     }
 
@@ -90,10 +98,10 @@ public class FavoriteFAB extends FloatingActionButton {
     }
 
     private void onFavoriteConversion() {
-        setImageTintList(getResources().getColorStateList(R.color.fabIconFavorite, getContext().getTheme()));
+        setImageTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
     }
 
     private void onNotFavoriteConversion() {
-        setImageTintList(getResources().getColorStateList(R.color.fabIconNormal, getContext().getTheme()));
+        setImageTintList(ContextCompat.getColorStateList(getContext(), R.color.fabIconNormal));
     }
 }

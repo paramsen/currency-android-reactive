@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.rx.RxUtils;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
+import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.source.CurrencySource;
 import com.amsen.par.cewlrency.source.PreferencesSource;
@@ -23,6 +24,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 
 import static com.amsen.par.cewlrency.persistence.preferences.PreferencesHelper.CURRENCY_FROM;
@@ -74,6 +76,11 @@ public class CurrencyFragment extends BaseFragment {
 
         currencyPickerFrom.applyItems(currencies, from != null ? from : "AUD");
         currencyPickerTo.applyItems(currencies, to != null ? to : "SEK");
+    }
+
+    @OnClick(R.id.container)
+    public void onClick() {
+        ViewUtils.hideKeyboard(getBaseActivity());
     }
 
     @Override

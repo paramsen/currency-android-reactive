@@ -25,6 +25,10 @@ public class SubscriberUtils {
         return Subscribers.create(wrap(onNext), onError(), onComplete);
     }
 
+    public static <T> Subscriber<T> onNextOnError(Action1<T> onNext, Action1<Throwable> onError) {
+        return Subscribers.create(wrap(onNext), wrap(onError), () -> {});
+    }
+
     private static Action1<Throwable> onError() {
         return Throwable::printStackTrace;
     }

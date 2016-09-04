@@ -15,7 +15,7 @@
 
     <EditText
         style="@style/EditText"
-        android:hint="Amount"
+        android:hint="@string/Amount"
         android:id="@+id/editText"
         android:minWidth="0dp"
         android:padding="0dp"

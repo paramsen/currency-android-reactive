@@ -36,6 +36,18 @@ public class ViewUtils {
     }
 
     /**
+     * SO http://stackoverflow.com/a/17789187/5704677
+     */
+    public static void showKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.showSoftInput(view, 0);
+    }
+
+    /**
      * Wrote this to unpacks the Context provided to Views
      * from the LayoutInflater to get the Activity context.
      *

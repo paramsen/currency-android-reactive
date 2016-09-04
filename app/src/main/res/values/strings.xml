@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Cewrncy Conv</string>
+    <string name="app_name">Cewlrency</string>
     <string name="ARG1_to_ARG2_set_as_your_standard_conversion">%1$s to %2$s set as your standard conversion 💰👌</string>
     <string name="This_is_already_your_standard_conversion">This is already your standard conversion 💰👌</string>
+    <string name="fa_money">&#xf0d6;</string>
+    <string name="Amount">Amount</string>
 </resources>

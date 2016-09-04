@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,11 +16,13 @@ import com.amsen.par.cewlrency.base.util.CurrencyUtil;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CurrencyInput extends LinearLayout {
     @Inject
@@ -34,6 +37,7 @@ public class CurrencyInput extends LinearLayout {
 
     private Currency currency;
     private boolean currencyBefore;
+    private BaseActivity activity;
 
     public CurrencyInput(Context context) {
         super(context);
@@ -52,6 +56,7 @@ public class CurrencyInput extends LinearLayout {
 
     private void init(Context context) {
         ViewUtils.inflate(context, R.layout.view_amount_input, this, true, (activity, view) -> {
+            this.activity = activity;
             activity.getComponent().inject(this);
             ButterKnife.bind(this);
 
@@ -70,6 +75,12 @@ public class CurrencyInput extends LinearLayout {
     private void setupBehavior() {
         streamCurrencyEvents();
         editTextListener();
+    }
+
+    @OnClick({R.id.textViewBefore, R.id.textViewAfter})
+    public void onClickCurrency() {
+        editText.requestFocus();
+        ViewUtils.showKeyboard(activity);
     }
 
     private void streamCurrencyEvents() {

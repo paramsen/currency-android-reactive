@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "356359768468",
+    "firebase_url": "https://cewlrency.firebaseio.com",
+    "project_id": "cewlrency",
+    "storage_bucket": "cewlrency.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356359768468:android:10a284940e4161e4",
+        "android_client_info": {
+          "package_name": "com.amsen.par.cewlrency"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356359768468-jgq55dcvmm4l2c7oeeelrs0uh3g1epkn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amsen.par.cewlrency",
+            "certificate_hash": "451ABC0A224D73F94D0434E1004C2F18B9025250"
+          }
+        },
+        {
+          "client_id": "356359768468-ceh9j3dkb16ok18n1g6kqktmos5284pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTuqj-qxuY8RkqK2Owhj9RkckxvH8DdYs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356359768468-ceh9j3dkb16ok18n1g6kqktmos5284pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

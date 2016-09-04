@@ -2,11 +2,10 @@
 <resources>
     <color name="colorPrimary">#38cc7e</color>
     <color name="colorPrimaryDark">#33be75</color>
-    <color name="colorAccent">#cc3886</color>
+    <color name="colorAccent">#ffd740</color>
+    <color name="colorAccentLight">#ffe57f</color>
 
     <color name="whiteHint">#AAFFFFFF</color>
     <color name="fabNormal">#FFF</color>
     <color name="fabIconNormal">#AAA</color>
-    <color name="fabFavorite">#000</color>
-    <color name="fabIconFavorite">#ffd740</color>
 </resources>
