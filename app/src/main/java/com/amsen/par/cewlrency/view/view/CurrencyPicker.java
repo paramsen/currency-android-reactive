@@ -52,8 +52,8 @@ public class CurrencyPicker extends FrameLayout {
         });
     }
 
-    public void applyItems(List<Currency> items) {
-        viewPager.applyItems(items);
+    public void applyItems(List<Currency> items, String initialCurrency) {
+        viewPager.applyItems(items, initialCurrency);
     }
 
     public void setEventType(CurrencyEvent.Type eventType) {

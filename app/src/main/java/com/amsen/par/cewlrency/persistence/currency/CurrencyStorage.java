@@ -8,5 +8,4 @@ import com.amsen.par.cewlrency.persistence.Storage;
  * @author Pär Amsen 2016
  */
 public interface CurrencyStorage extends Storage<Currency, String> {
-
 }

@@ -69,15 +69,15 @@ public class CurrencyTextView extends TextView {
     }
 
     private void onAmountChanged(CurrencyEvent currencyEvent) {
-        if(currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_FROM) {
+        if (currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_FROM) {
             currencyFrom = (Currency) currencyEvent.value;
-        } else if(currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_TO) {
+        } else if (currencyEvent.type == CurrencyEvent.Type.CHANGE_CURRENCY_TO) {
             currencyTo = (Currency) currencyEvent.value;
         } else {
             amount = (double) currencyEvent.value;
         }
 
-        if(currencyTo != null) {
+        if (currencyFrom != null && currencyTo != null) {
             double multiplier = baseCurrency.getRate() / currencyFrom.getRate();
             double conversionRate = currencyTo.getRate() * multiplier;
 

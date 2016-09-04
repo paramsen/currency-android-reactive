@@ -11,6 +11,7 @@ import com.amsen.par.cewlrency.base.rx.RxUtils;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.source.CurrencySource;
+import com.amsen.par.cewlrency.source.PreferencesSource;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
 import com.amsen.par.cewlrency.view.view.CurrencyInput;
 import com.amsen.par.cewlrency.view.view.CurrencyPicker;
@@ -24,12 +25,17 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import rx.android.schedulers.AndroidSchedulers;
 
+import static com.amsen.par.cewlrency.persistence.preferences.PreferencesHelper.CURRENCY_FROM;
+import static com.amsen.par.cewlrency.persistence.preferences.PreferencesHelper.CURRENCY_TO;
+
 /**
  * @author Pär Amsen 2016
  */
 public class CurrencyFragment extends BaseFragment {
     @Inject
     CurrencySource source;
+    @Inject
+    PreferencesSource preferencesSource;
 
     @BindView(R.id.currencyPickerFrom)
     CurrencyPicker currencyPickerFrom;
@@ -63,8 +69,11 @@ public class CurrencyFragment extends BaseFragment {
     }
 
     private void onCurrencies(List<Currency> currencies) {
-        currencyPickerFrom.applyItems(currencies);
-        currencyPickerTo.applyItems(currencies);
+        String from = preferencesSource.<String>get(CURRENCY_FROM);
+        String to = preferencesSource.<String>get(CURRENCY_TO);
+
+        currencyPickerFrom.applyItems(currencies, from);
+        currencyPickerTo.applyItems(currencies, to);
     }
 
     @Override

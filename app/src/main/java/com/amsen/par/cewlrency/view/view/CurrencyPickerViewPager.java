@@ -16,10 +16,13 @@ import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import static com.amsen.par.cewlrency.view.CurrencyEvent.Type.CHANGE_CURRENCY_TO;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
 
 /**
  * ViewPager that shows 3 Views at once. Encapsulates
@@ -45,10 +48,15 @@ public class CurrencyPickerViewPager extends ViewPager {
         setOffscreenPageLimit(4);
         setAdapter(getCustomAdapter());
         setPageTransformer(true, getPageTransformer());
+
+        setupBehavior();
+    }
+
+    private void setupBehavior() {
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                eventStream.post(new CurrencyEvent<>(items.get(position), eventType));
+               eventStream.post(new CurrencyEvent<>(items.get(position), eventType));
             }
 
             @Override
@@ -67,10 +75,21 @@ public class CurrencyPickerViewPager extends ViewPager {
         this.eventType = eventType;
     }
 
-    public void applyItems(List<Currency> items) {
+    public void applyItems(List<Currency> items, String initialCurrencyId) {
         this.items = items;
         getAdapter().notifyDataSetChanged();
-        setCurrentItem(items.size() / 2);
+
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getId().equals(initialCurrencyId)) {
+                if (i == 0) { //if first index, onPageSelected listener won't get called
+                    eventStream.post(new CurrencyEvent<>(items.get(i), eventType));
+                }
+
+                setCurrentItem(i);
+
+                break;
+            }
+        }
     }
 
     private PagerAdapter getCustomAdapter() {

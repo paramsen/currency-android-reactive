@@ -1,14 +1,15 @@
 package com.amsen.par.cewlrency.base.dependency.application;
 
 import com.amsen.par.cewlrency.api.fixerio.FixerIoResource;
+import com.amsen.par.cewlrency.persistence.preferences.PersistentStorage;
 import com.amsen.par.cewlrency.persistence.currency.MockStorage;
 import com.amsen.par.cewlrency.source.CurrencySource;
+import com.amsen.par.cewlrency.source.PreferencesSource;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 /**
  * @author Pär Amsen 2016
@@ -17,7 +18,13 @@ import retrofit2.Retrofit;
 public class SourceModule {
     @Provides
     @Singleton
-    public CurrencySource provideWeatherSource(FixerIoResource.ApiAccess apiAccess, MockStorage currencyStorage) {
+    public CurrencySource provideCurrencySource(FixerIoResource.ApiAccess apiAccess, MockStorage currencyStorage) {
         return new CurrencySource(apiAccess, currencyStorage);
+    }
+
+    @Provides
+    @Singleton
+    public PreferencesSource providePreferencesSource(PersistentStorage storage) {
+        return new PreferencesSource(storage);
     }
 }
