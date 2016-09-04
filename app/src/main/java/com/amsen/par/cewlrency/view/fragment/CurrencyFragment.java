@@ -72,8 +72,8 @@ public class CurrencyFragment extends BaseFragment {
         String from = preferencesSource.<String>get(CURRENCY_FROM);
         String to = preferencesSource.<String>get(CURRENCY_TO);
 
-        currencyPickerFrom.applyItems(currencies, from);
-        currencyPickerTo.applyItems(currencies, to);
+        currencyPickerFrom.applyItems(currencies, from != null ? from : "AUD");
+        currencyPickerTo.applyItems(currencies, to != null ? to : "SEK");
     }
 
     @Override

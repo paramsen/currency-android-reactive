@@ -7,12 +7,14 @@
     android:background="@drawable/edit_text_bg">
 
     <TextView
+        style="@style/TextView"
         android:id="@+id/textViewBefore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="SEK " />
 
     <EditText
+        style="@style/EditText"
         android:hint="Amount"
         android:id="@+id/editText"
         android:minWidth="0dp"
@@ -25,6 +27,7 @@
         tools:text="10" />
 
     <TextView
+        style="@style/TextView"
         android:id="@+id/textViewAfter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

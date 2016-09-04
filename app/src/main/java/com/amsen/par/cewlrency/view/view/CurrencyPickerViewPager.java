@@ -4,10 +4,13 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
@@ -40,16 +43,19 @@ public class CurrencyPickerViewPager extends ViewPager {
 
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        activity = ViewUtils.getBaseActivity(context);
-        activity.getComponent().inject(this);
 
-        items = new ArrayList<>();
-        setClipChildren(false);
-        setOffscreenPageLimit(4);
-        setAdapter(getCustomAdapter());
-        setPageTransformer(true, getPageTransformer());
+        if(!isInEditMode()) {
+            activity = ViewUtils.getBaseActivity(context);
+            activity.getComponent().inject(this);
 
-        setupBehavior();
+            items = new ArrayList<>();
+            setClipChildren(false);
+            setOffscreenPageLimit(4);
+            setAdapter(getCustomAdapter());
+            setPageTransformer(true, getPageTransformer());
+
+            setupBehavior();
+        }
     }
 
     private void setupBehavior() {
@@ -107,6 +113,11 @@ public class CurrencyPickerViewPager extends ViewPager {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 TextView textView = new TextView(container.getContext());
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size));
+                textView.setTextColor(getResources().getColor(android.R.color.white, container.getContext().getTheme()));
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
                 textView.setText(items.get(position).getId());
                 textView.setTag(position);
                 container.addView(textView);

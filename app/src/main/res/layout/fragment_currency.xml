@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     tools:background="@color/colorPrimary">
 
-    <TextView
-        android:textColor="#333"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            style="@style/TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:text="CASH MONEY ™"
+            android:textColor="#333"
+            android:textSize="@dimen/text_size_logo" />
+
+        <com.amsen.par.cewlrency.view.view.CurrencyPicker
+            android:id="@+id/currencyPickerFrom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:clipChildren="false"
+            tools:layout_height="80dp" />
+
+        <com.amsen.par.cewlrency.view.view.CurrencyInput
+            android:id="@+id/currencyEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp" />
+
+        <com.amsen.par.cewlrency.view.view.CurrencyPicker
+            android:id="@+id/currencyPickerTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:clipChildren="false"
+            tools:layout_height="80dp" />
+
+        <com.amsen.par.cewlrency.view.view.CurrencyTextView
+            style="@style/TextView"
+            android:id="@+id/currencyTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_size"
+            tools:text="£2,456.78" />
+    </LinearLayout>
+
+    <com.amsen.par.cewlrency.view.view.FavoriteFAB
+        app:backgroundTint="@color/fabNormal"
+        android:src="@drawable/ic_grade_black_24dp"
+        android:tint="@color/fabIconNormal"
+        app:rippleColor="@color/fabIconFavorite"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="bottom|end"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:text="CASH MONEY ™"
-        android:textSize="@dimen/text_size_logo" />
-
-    <com.amsen.par.cewlrency.view.view.CurrencyPicker
-        android:id="@+id/currencyPickerFrom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:clipChildren="false"
-        tools:layout_height="80dp" />
-
-    <com.amsen.par.cewlrency.view.view.CurrencyInput
-        android:id="@+id/currencyEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp" />
-
-    <com.amsen.par.cewlrency.view.view.CurrencyPicker
-        android:id="@+id/currencyPickerTo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:clipChildren="false"
-        tools:layout_height="80dp" />
-
-    <com.amsen.par.cewlrency.view.view.CurrencyTextView
-        android:id="@+id/currencyTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        tools:text="£2,456.78"
-        android:textSize="@dimen/text_size" />
-
-</LinearLayout>
+        android:layout_height="wrap_content" />
+</android.support.design.widget.CoordinatorLayout>

@@ -5,4 +5,8 @@
     <color name="colorAccent">#cc3886</color>
 
     <color name="whiteHint">#AAFFFFFF</color>
+    <color name="fabNormal">#FFF</color>
+    <color name="fabIconNormal">#AAA</color>
+    <color name="fabFavorite">#000</color>
+    <color name="fabIconFavorite">#ffd740</color>
 </resources>

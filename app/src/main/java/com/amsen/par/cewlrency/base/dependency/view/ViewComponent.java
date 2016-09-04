@@ -7,6 +7,7 @@ import com.amsen.par.cewlrency.view.fragment.CurrencyFragment;
 import com.amsen.par.cewlrency.view.view.CurrencyInput;
 import com.amsen.par.cewlrency.view.view.CurrencyPickerViewPager;
 import com.amsen.par.cewlrency.view.view.CurrencyTextView;
+import com.amsen.par.cewlrency.view.view.FavoriteFAB;
 
 import dagger.Subcomponent;
 
@@ -24,4 +25,5 @@ public interface ViewComponent {
     void inject(CurrencyPickerViewPager view);
     void inject(CurrencyTextView view);
     void inject(CurrencyInput view);
+    void inject(FavoriteFAB view);
 }
