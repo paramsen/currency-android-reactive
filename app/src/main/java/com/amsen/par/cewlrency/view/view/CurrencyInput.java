@@ -1,6 +1,7 @@
 package com.amsen.par.cewlrency.view.view;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -110,7 +111,7 @@ public class CurrencyInput extends LinearLayout {
             public void afterTextChanged(Editable s) {
                 if(s.length() > 0) {
                     try {
-                        double value = Double.parseDouble(s.toString());
+                        double value = Double.parseDouble(s.toString().replace(",", "."));
                         editText.setHint("0");
 
                         if(currencyBefore) {
@@ -123,10 +124,10 @@ public class CurrencyInput extends LinearLayout {
 
                         eventStream.post(new CurrencyEvent<>(value, CurrencyEvent.Type.CHANGE_AMOUNT));
                     } catch (Exception e) {
-                        //ignore
+                        Snackbar.make(editText, R.string.Invalid_amount, Snackbar.LENGTH_LONG).show();
                     }
                 } else {
-                    editText.setHint("Amount");
+                    editText.setHint(R.string.Amount);
 
                     textViewBefore.setVisibility(GONE);
                     textViewAfter.setVisibility(GONE);
