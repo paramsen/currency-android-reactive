@@ -1,6 +1,7 @@
 package com.amsen.par.cewlrency.view.view;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -114,7 +115,7 @@ public class CurrencyPickerViewPager extends ViewPager {
             public Object instantiateItem(ViewGroup container, int position) {
                 TextView textView = new TextView(container.getContext());
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size));
-                textView.setTextColor(getResources().getColor(android.R.color.white));
+                textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.white));
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
