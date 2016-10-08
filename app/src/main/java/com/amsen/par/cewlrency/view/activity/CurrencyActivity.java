@@ -1,21 +1,18 @@
 package com.amsen.par.cewlrency.view.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.analytics.BehaviorTracker;
-import com.amsen.par.cewlrency.base.dependency.scope.ViewScope;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
 import com.amsen.par.cewlrency.source.CurrencySource;
 import com.amsen.par.cewlrency.view.fragment.CurrencyFragment;
 import com.amsen.par.cewlrency.view.fragment.SplashFragment;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -47,8 +44,9 @@ public class CurrencyActivity extends BaseActivity {
 
     private void initialState() {
         source.getCurrencies()
+                .delay(300, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(SubscriberUtils.onNextOnError(e -> showFragment(new CurrencyFragment()), this::onNetworkError));
+                .subscribe(SubscriberUtils.onNextOnError(e -> showFragmentTransitionIcon(new CurrencyFragment(), fragmentContainer.findViewById(R.id.icon)), this::onNetworkError));
     }
 
     private void onNetworkError(Throwable throwable) {

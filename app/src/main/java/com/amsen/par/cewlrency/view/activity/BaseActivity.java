@@ -6,7 +6,11 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -16,6 +20,8 @@ import com.amsen.par.cewlrency.base.CurrencyApplication;
 import com.amsen.par.cewlrency.base.dependency.view.ViewComponent;
 import com.amsen.par.cewlrency.base.dependency.view.ViewModule;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -59,9 +65,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void inject();
 
     public void showFragment(Fragment fragment) {
+        fragment.setEnterTransition(new Fade());
+        fragment.setExitTransition(new Fade());
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+    }
+
+    public void showFragmentTransitionIcon(Fragment fragment, View shared) {
+        Transition changeTransform = TransitionInflater.from(this).
+                inflateTransition(R.transition.change_image_transform);
+        fragment.setSharedElementEnterTransition(changeTransform);
+        fragment.setEnterTransition(new Fade());
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .addSharedElement(shared, "icon")
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
     }

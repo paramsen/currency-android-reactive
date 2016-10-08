@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
+import com.amsen.par.cewlrency.BuildConfig;
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -23,6 +26,8 @@ import rx.schedulers.Schedulers;
 public class SplashFragment extends BaseFragment {
     @BindView(R.id.loader)
     View loader;
+    @BindView(R.id.version)
+    TextView version;
 
     private boolean detached;
 
@@ -45,6 +50,14 @@ public class SplashFragment extends BaseFragment {
                     .setDuration(300)
                     .setInterpolator(new DecelerateInterpolator())
                     .start();
+
+            showBetaInfo();
+        }
+    }
+
+    private void showBetaInfo() {
+        if (BuildConfig.FLAVOR.equals("beta")) {
+            version.setText(String.format(Locale.US, "[versionCode: \"%d\", versionName: \"%s\"]", BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME));
         }
     }
 

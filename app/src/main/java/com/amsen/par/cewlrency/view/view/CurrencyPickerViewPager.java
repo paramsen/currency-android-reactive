@@ -20,13 +20,8 @@ import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
 
 /**
  * ViewPager that shows 3 Views at once. Encapsulates
@@ -45,7 +40,7 @@ public class CurrencyPickerViewPager extends ViewPager {
     public CurrencyPickerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        if(!isInEditMode()) {
+        if (!isInEditMode()) {
             activity = ViewUtils.getBaseActivity(context);
             activity.getComponent().inject(this);
 
@@ -63,7 +58,7 @@ public class CurrencyPickerViewPager extends ViewPager {
         addOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-               eventStream.post(new CurrencyEvent<>(items.get(position), eventType));
+                eventStream.post(new CurrencyEvent<>(items.get(position), eventType));
             }
 
             @Override
@@ -85,6 +80,7 @@ public class CurrencyPickerViewPager extends ViewPager {
     public void applyItems(List<Currency> items, String initialCurrencyId) {
         this.items = items;
         getAdapter().notifyDataSetChanged();
+        requestLayout();
 
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(initialCurrencyId)) {

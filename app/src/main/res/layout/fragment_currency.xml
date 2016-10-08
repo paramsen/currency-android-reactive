@@ -5,8 +5,8 @@
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/container"
@@ -27,16 +27,14 @@
                 android:orientation="horizontal"
                 android:padding="2dp">
 
-                <TextView
-                    style="@style/TextView"
-                    fontPath="font/fontawesome.ttf"
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/fa_money"
-                    android:textColor="#99000000"
-                    android:textSize="36dp"
-                    tools:ignore="MissingPrefix" />
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon"
+                    android:transitionName="icon" />
 
                 <TextView
                     style="@style/TextView"
@@ -46,7 +44,7 @@
                     android:layout_marginLeft="8dp"
                     android:gravity="center_vertical"
                     android:text="@string/app_name"
-                    android:textColor="#99000000"
+                    android:textColor="#88000000"
                     android:textSize="@dimen/text_size_logo"
                     tools:ignore="MissingPrefix" />
             </LinearLayout>
@@ -66,7 +64,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"
+                android:transitionGroup="false" />
 
             <com.amsen.par.cewlrency.view.view.CurrencyPicker
                 android:id="@+id/currencyPickerTo"
@@ -81,11 +80,11 @@
                 style="@style/TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/text_size"
-                tools:text="£2,456.78"
-                android:layout_marginBottom="20dp"/>
+                tools:text="£2,456.78" />
         </LinearLayout>
 
         <com.amsen.par.cewlrency.view.view.FavoriteFAB
