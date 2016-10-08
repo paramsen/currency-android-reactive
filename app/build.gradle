@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
-def VERSION_CODE = 3
-def VERSION_NAME = "0.8.5"
+def VERSION_CODE = 4
+def VERSION_NAME = "0.9"
 
 android {
     signingConfigs {

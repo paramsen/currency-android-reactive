@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.amsen.par.cewlrency.BuildConfig;
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
+import com.amsen.par.cewlrency.base.util.ViewUtils;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,8 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.amsen.par.cewlrency.base.util.ViewUtils.dpToPx;
 
 /**
  * @author Pär Amsen 2016
@@ -57,7 +60,10 @@ public class SplashFragment extends BaseFragment {
 
     private void showBetaInfo() {
         if (BuildConfig.FLAVOR.equals("beta")) {
+            version.setAlpha(0);
+            version.setY(version.getY() + dpToPx(getContext(), 3));
             version.setText(String.format(Locale.US, "[versionCode: \"%d\", versionName: \"%s\"]", BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME));
+            version.animate().alpha(1).setDuration(1000).yBy(-dpToPx(getContext(), 3)).setInterpolator(new DecelerateInterpolator());
         }
     }
 
