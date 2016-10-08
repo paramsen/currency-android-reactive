@@ -5,28 +5,35 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.rx.RxUtils;
-import com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils;
+import com.amsen.par.cewlrency.base.rx.event.Event;
+import com.amsen.par.cewlrency.base.rx.event.EventStream;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.source.CurrencySource;
 import com.amsen.par.cewlrency.source.PreferencesSource;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.activity.KeyboardEvent;
 import com.amsen.par.cewlrency.view.view.CurrencyInput;
 import com.amsen.par.cewlrency.view.view.CurrencyPicker;
 import com.amsen.par.cewlrency.view.view.CurrencyTextView;
+import com.amsen.par.cewlrency.view.view.FavoriteFAB;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
+import static com.amsen.par.cewlrency.base.rx.subscriber.SubscriberUtils.onNext;
 import static com.amsen.par.cewlrency.persistence.preferences.PreferencesHelper.CURRENCY_FROM;
 import static com.amsen.par.cewlrency.persistence.preferences.PreferencesHelper.CURRENCY_TO;
 
@@ -38,7 +45,11 @@ public class CurrencyFragment extends BaseFragment {
     CurrencySource source;
     @Inject
     PreferencesSource preferencesSource;
+    @Inject
+    EventStream eventStream;
 
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.currencyPickerFrom)
     CurrencyPicker currencyPickerFrom;
     @BindView(R.id.currencyPickerTo)
@@ -47,6 +58,8 @@ public class CurrencyFragment extends BaseFragment {
     CurrencyInput currencyInput;
     @BindView(R.id.currencyTextView)
     CurrencyTextView currencyTextView;
+    @BindView(R.id.favFAB)
+    FavoriteFAB favFAB;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -54,6 +67,7 @@ public class CurrencyFragment extends BaseFragment {
 
         getBaseActivity().getComponent().inject(this);
         setupViews();
+        setupBehavior();
         initialState();
     }
 
@@ -67,7 +81,7 @@ public class CurrencyFragment extends BaseFragment {
         source.getCurrencies()
                 .map(RxUtils::sort)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(SubscriberUtils.onNext(this::onCurrencies));
+                .subscribe(onNext(this::onCurrencies));
     }
 
     private void onCurrencies(List<Currency> currencies) {
@@ -81,6 +95,22 @@ public class CurrencyFragment extends BaseFragment {
     @OnClick(R.id.container)
     public void onClick() {
         ViewUtils.hideKeyboard(getBaseActivity());
+    }
+
+    private void setupBehavior() {
+        Observable<Event> show = eventStream.stream()
+                .filter(event -> event == KeyboardEvent.KEYBOARD_SHOW)
+                .share();
+
+        Observable<Event> hide = eventStream.stream()
+                .filter(event -> event == KeyboardEvent.KEYBOARD_HIDE);
+
+        show.delay(100, TimeUnit.MILLISECONDS, Schedulers.computation())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(onNext(e -> scrollView.smoothScrollTo(0, scrollView.getChildAt(0).getBottom())));
+
+        show.subscribe(onNext(e -> favFAB.hide()));
+        hide.subscribe(onNext(e -> favFAB.show()));
     }
 
     @Override

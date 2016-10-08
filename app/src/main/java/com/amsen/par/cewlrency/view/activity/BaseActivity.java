@@ -2,21 +2,33 @@ package com.amsen.par.cewlrency.view.activity;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.CurrencyApplication;
 import com.amsen.par.cewlrency.base.dependency.view.ViewComponent;
 import com.amsen.par.cewlrency.base.dependency.view.ViewModule;
+import com.amsen.par.cewlrency.base.rx.event.EventStream;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class BaseActivity extends AppCompatActivity {
+    @Inject
+    EventStream eventStream;
     private ViewComponent component;
+    private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener;
+    private Window window;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +38,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         _inject();
         inject();
+
+        window = getWindow();
+        rootView = window.findViewById(Window.ID_ANDROID_CONTENT);
+        keyboardLayoutListener = getKeyboardLayoutListener();
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(keyboardLayoutListener);
     }
 
     @LayoutRes
     protected abstract int getLayout();
+
+    protected abstract View getRootView();
 
     private void _inject() {
         component = ((CurrencyApplication) getApplication()).getApplicationComponent().plus(new ViewModule(this));
@@ -47,6 +66,28 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public ViewTreeObserver.OnGlobalLayoutListener getKeyboardLayoutListener() {
+        return new ViewTreeObserver.OnGlobalLayoutListener() {
+            int initialHeight;
+
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                View view = window.getDecorView();
+                view.getWindowVisibleDisplayFrame(r);
+
+                if (initialHeight == 0) {
+                    initialHeight = r.height();
+                } else {
+                    if (initialHeight > r.height()) {
+                        eventStream.post(KeyboardEvent.KEYBOARD_SHOW);
+                    } else if (initialHeight == r.height()) {
+                        eventStream.post(KeyboardEvent.KEYBOARD_HIDE);
+                    }
+                }
+            }
+        };
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -55,5 +96,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public ViewComponent getComponent() {
         return component;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(keyboardLayoutListener);
     }
 }
