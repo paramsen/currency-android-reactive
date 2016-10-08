@@ -37,10 +37,12 @@ public class BehaviorTracker {
 
         events.filter(e -> e.type == CHANGE_CURRENCY_FROM)
                 .throttleWithTimeout(5000, TimeUnit.MILLISECONDS, Schedulers.computation())
+                .skip(1)
                 .subscribe(SubscriberUtils.onNext(this::changeCurrencyEvent));
 
         events.filter(e -> e.type == CHANGE_CURRENCY_TO)
                 .throttleWithTimeout(5000, TimeUnit.MILLISECONDS, Schedulers.computation())
+                .skip(1)
                 .subscribe(SubscriberUtils.onNext(this::changeCurrencyEvent));
 
         events.filter(e -> e.type == CHANGE_AMOUNT)
