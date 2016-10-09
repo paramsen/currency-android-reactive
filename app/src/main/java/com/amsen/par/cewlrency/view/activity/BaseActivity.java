@@ -1,12 +1,10 @@
 package com.amsen.par.cewlrency.view.activity;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -21,12 +19,9 @@ import com.amsen.par.cewlrency.base.dependency.view.ViewComponent;
 import com.amsen.par.cewlrency.base.dependency.view.ViewModule;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public abstract class BaseActivity extends AppCompatActivity {
     @Inject
@@ -110,11 +105,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             }
         };
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public ViewComponent getComponent() {
