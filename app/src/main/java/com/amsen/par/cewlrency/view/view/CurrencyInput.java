@@ -5,8 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,7 +69,7 @@ public class CurrencyInput extends LinearLayout {
         textViewBefore.setVisibility(GONE);
         textViewAfter.setVisibility(GONE);
 
-        currencyBefore = CurrencyUtil.format(java.util.Currency.getInstance("SEK"), 0).indexOf("SEK") == 0; //whether device Locale formats currency before/after a value
+        currencyBefore = CurrencyUtil.isCurrencySymbolBeforeValueInLocale();
     }
 
     private void setupBehavior() {
@@ -110,12 +108,12 @@ public class CurrencyInput extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length() > 0) {
+                if (s.length() > 0) {
                     try {
                         double value = Double.parseDouble(s.toString().replace(",", "."));
                         editText.setHint("0");
 
-                        if(currencyBefore) {
+                        if (currencyBefore) {
                             textViewBefore.setVisibility(VISIBLE);
                             textViewAfter.setVisibility(GONE);
                         } else {

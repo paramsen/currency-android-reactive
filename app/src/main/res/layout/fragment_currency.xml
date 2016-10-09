@@ -28,17 +28,17 @@
                 android:padding="2dp">
 
                 <ImageView
+                    android:id="@+id/icon"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="center_vertical"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon"
+                    android:src="@drawable/icon_large"
                     android:transitionName="icon" />
 
                 <TextView
                     style="@style/TextView"
-                    fontPath="font/fontawesome.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -62,10 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:transitionGroup="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:transitionGroup="false" />
+                android:layout_marginTop="16dp" />
 
             <com.amsen.par.cewlrency.view.view.CurrencyPicker
                 android:id="@+id/currencyPickerTo"

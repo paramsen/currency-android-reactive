@@ -48,6 +48,7 @@ public class CurrencyTextView extends TextView {
     private void init(Context context) {
         if (!isInEditMode()) {
             ViewUtils.getBaseActivity(context).getComponent().inject(this);
+
             initialState();
         }
     }

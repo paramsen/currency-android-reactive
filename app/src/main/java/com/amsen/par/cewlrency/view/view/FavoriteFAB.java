@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 
 import com.amsen.par.cewlrency.R;
@@ -62,11 +61,11 @@ public class FavoriteFAB extends FloatingActionButton {
 
             onFavoriteConversion();
 
-            Snackbar.make(this, getResources().getString(R.string.ARG1_to_ARG2_set_as_your_standard_conversion, from.getId(), to.getId()), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(this, getResources().getString(R.string.ARG1_to_ARG2_set_as_your_standard_conversion_ARG3, from.getId(), to.getId(), "\uD83D\uDCB0"), Snackbar.LENGTH_LONG).show();
 
             analytics.newFavourite(from.getId(), to.getId());
         } else {
-            Snackbar.make(this, R.string.This_is_already_your_standard_conversion, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(this, getContext().getString(R.string.This_is_already_your_standard_conversion_ARG1, "\uD83D\uDCB0"), Snackbar.LENGTH_LONG).show();
             analytics.alreadyChosenFavourite(fromId, toId);
         }
     }
