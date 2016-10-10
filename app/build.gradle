@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
-def VERSION_CODE = 5
+def VERSION_CODE = 6
 def VERSION_NAME = "0.9.1"
 
 android {
