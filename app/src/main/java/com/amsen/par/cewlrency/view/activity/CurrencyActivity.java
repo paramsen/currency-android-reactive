@@ -2,6 +2,7 @@ package com.amsen.par.cewlrency.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.amsen.par.cewlrency.R;
@@ -44,7 +45,7 @@ public class CurrencyActivity extends BaseActivity {
 
     private void initialState() {
         source.getCurrencies()
-                .delay(300, TimeUnit.MILLISECONDS)
+                .delay(300, TimeUnit.MILLISECONDS) //give that splash some time to show
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(SubscriberUtils.onNextOnError(e -> showFragmentTransitionIcon(new CurrencyFragment(), fragmentContainer.findViewById(R.id.icon)), this::onNetworkError));
     }
