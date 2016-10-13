@@ -2,6 +2,7 @@ package com.amsen.par.cewlrency.view.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
@@ -11,6 +12,7 @@ import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.source.CurrencySource;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.activity.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -47,7 +49,8 @@ public class CurrencyTextView extends TextView {
 
     private void init(Context context) {
         if (!isInEditMode()) {
-            ViewUtils.getBaseActivity(context).getComponent().inject(this);
+            BaseActivity activity = ViewUtils.getBaseActivity(context);
+            activity.getComponent().inject(this);
 
             initialState();
         }

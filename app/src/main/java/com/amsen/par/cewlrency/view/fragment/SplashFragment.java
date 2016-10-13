@@ -53,17 +53,6 @@ public class SplashFragment extends BaseFragment {
                     .setDuration(300)
                     .setInterpolator(new DecelerateInterpolator())
                     .start();
-
-            showBetaInfo();
-        }
-    }
-
-    private void showBetaInfo() {
-        if (BuildConfig.FLAVOR.equals("beta")) {
-            version.setAlpha(0);
-            version.setY(version.getY() + dpToPx(getContext(), 3));
-            version.setText(String.format(Locale.US, "[versionCode: \"%d\", versionName: \"%s\"]", BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME));
-            version.animate().alpha(1).setDuration(1000).yBy(-dpToPx(getContext(), 3)).setInterpolator(new DecelerateInterpolator());
         }
     }
 

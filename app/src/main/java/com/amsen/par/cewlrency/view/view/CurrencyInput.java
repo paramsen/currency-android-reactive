@@ -97,6 +97,11 @@ public class CurrencyInput extends LinearLayout {
     }
 
     private void editTextListener() {
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            ViewUtils.hideKeyboard(activity);
+            return true;
+        });
+
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

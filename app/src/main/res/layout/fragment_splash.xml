@@ -28,18 +28,6 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:indeterminateOnly="true" />
-
-        <TextView
-            android:id="@+id/version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="60dp"
-            android:layout_marginRight="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#55000000"
-            android:textSize="12sp"
-            tools:text="Version text" />
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -61,6 +61,8 @@ public class CurrencyFragment extends BaseFragment {
     @BindView(R.id.favFAB)
     FavoriteFAB favFAB;
 
+    private static int debugClicks = 0;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -95,6 +97,16 @@ public class CurrencyFragment extends BaseFragment {
     @OnClick(R.id.container)
     public void onClick() {
         ViewUtils.hideKeyboard(getBaseActivity());
+    }
+
+    @OnClick(R.id.icon)
+    public void onClickIcon() {
+        ++debugClicks;
+
+        if(debugClicks >= 10) {
+            new DebugDialogFragment().show(getFragmentManager(), DebugDialogFragment.class.getName());
+        }
+
     }
 
     private void setupBehavior() {
