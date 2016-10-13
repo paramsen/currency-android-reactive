@@ -1,7 +1,8 @@
 package com.amsen.par.cewlrency.base.dependency.view;
 
+import android.content.Context;
+
 import com.amsen.par.cewlrency.view.activity.BaseActivity;
-import com.amsen.par.cewlrency.view.activity.CurrencyActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import dagger.Module;
@@ -20,6 +21,11 @@ public class ViewModule {
 
     @Provides
     public BaseActivity provideActivity() {
+        return activity;
+    }
+
+    @Provides
+    public Context provideContext() {
         return activity;
     }
 

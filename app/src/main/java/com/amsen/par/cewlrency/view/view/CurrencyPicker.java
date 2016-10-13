@@ -2,14 +2,13 @@ package com.amsen.par.cewlrency.view.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.amsen.par.cewlrency.R;
 import com.amsen.par.cewlrency.base.util.ViewUtils;
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
+import com.amsen.par.cewlrency.view.view.currencypicker.CurrencyPickerRecycler;
 
 import java.util.List;
 
@@ -23,8 +22,8 @@ import butterknife.ButterKnife;
  * @author Pär Amsen 2016
  */
 public class CurrencyPicker extends FrameLayout {
-    @BindView(R.id.viewPager)
-    CurrencyPickerViewPager viewPager;
+    @BindView(R.id.currencyRecycler)
+    CurrencyPickerRecycler currencyRecycler;
 
     public CurrencyPicker(Context context) {
         super(context);
@@ -53,10 +52,10 @@ public class CurrencyPicker extends FrameLayout {
     }
 
     public void applyItems(List<Currency> items, String initialCurrency) {
-        viewPager.applyItems(items, initialCurrency);
+        currencyRecycler.applyItems(items, initialCurrency);
     }
 
     public void setEventType(CurrencyEvent.Type eventType) {
-        viewPager.setEventType(eventType);
+        currencyRecycler.setEventType(eventType);
     }
 }

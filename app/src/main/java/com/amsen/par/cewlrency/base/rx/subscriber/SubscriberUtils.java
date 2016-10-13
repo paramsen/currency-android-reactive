@@ -1,5 +1,7 @@
 package com.amsen.par.cewlrency.base.rx.subscriber;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -42,7 +44,7 @@ public class SubscriberUtils {
             try {
                 toWrap.call(e);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                FirebaseCrash.report(ex);
             }
         };
     }

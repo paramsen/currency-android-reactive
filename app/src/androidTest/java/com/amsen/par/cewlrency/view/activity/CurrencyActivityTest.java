@@ -37,7 +37,7 @@ public class CurrencyActivityTest {
     @Test
     public void changeCurrency() {
         onView(withText(Matchers.containsString("€"))).check(doesNotExist()); //Shows YEN first
-        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.currencyRecycler)).perform(ViewActions.swipeLeft());
         onView(withText(Matchers.containsString("€"))).check(matches(isDisplayed())); //is EUR showing after swipe?
     }
 }

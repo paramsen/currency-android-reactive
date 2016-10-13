@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 /**
  * ViewPager that shows 3 Views at once. Encapsulates
- * all UI logic for the currency picker.
+ * all UI logic for the currency currencyRecycler.
  *
  * @author Pär Amsen 2016
  */

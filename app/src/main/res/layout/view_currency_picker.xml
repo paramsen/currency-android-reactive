@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:layout_height="80dp">
-    <com.amsen.par.cewlrency.view.view.CurrencyPickerViewPager
+
+    <com.amsen.par.cewlrency.view.view.currencypicker.CurrencyPickerRecycler
+        android:id="@+id/currencyRecycler"
         style="@style/CurrencyPicker"
-        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"/>
+        android:clipToPadding="false"
+        app:rvp_flingFactor=".2"
+        app:rvp_singlePageFling="false"
+        app:rvp_triggerOffset="0.1" />
 
     <ImageView
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/indicator"/>
+        android:src="@drawable/indicator" />
 
     <ImageView
-        android:layout_gravity="bottom|center_horizontal"
         android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/indicator"
-        android:rotation="180"/>
+        android:layout_gravity="bottom|center_horizontal"
+        android:rotation="180"
+        android:src="@drawable/indicator" />
 </FrameLayout>

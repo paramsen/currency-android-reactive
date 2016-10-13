@@ -1,6 +1,8 @@
 package com.amsen.par.cewlrency.analytics;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import com.amsen.par.cewlrency.model.Currency;
 import com.amsen.par.cewlrency.view.CurrencyEvent;
@@ -15,8 +17,9 @@ public class Analytics {
     private FirebaseAnalytics analytics;
 
     @Inject
-    public Analytics(FirebaseAnalytics analytics) {
+    public Analytics(Context context, FirebaseAnalytics analytics) {
         this.analytics = analytics;
+        analytics.setUserId(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
     }
 
     public void newFavourite(String from, String to) {
