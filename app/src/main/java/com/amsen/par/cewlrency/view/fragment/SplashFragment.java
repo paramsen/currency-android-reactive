@@ -29,8 +29,6 @@ import static com.amsen.par.cewlrency.base.util.ViewUtils.dpToPx;
 public class SplashFragment extends BaseFragment {
     @BindView(R.id.loader)
     View loader;
-    @BindView(R.id.version)
-    TextView version;
 
     private boolean detached;
 
