@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -32,5 +32,23 @@
         <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="rvp_flingFactor">.2</item>
+        <item name="rvp_singlePageFling">false</item>
+        <item name="rvp_scaleFactor">0.7</item>
+        <item name="rvp_triggerOffset">0.1</item>
     </style>
+
+    <style name="Widget.Design.FloatingActionButton.Currency">
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:src">@drawable/ic_grade_black_24dp</item>
+        <item name="android:tint">@color/fabIconNormal</item>
+        <item name="backgroundTint">@color/fabNormal</item>
+        <item name="rippleColor">@color/colorAccent</item>
+    </style>
+
 </resources>

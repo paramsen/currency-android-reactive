@@ -29,6 +29,8 @@ public class CurrencyPickerRecycler extends LoopRecyclerViewPager {
     private BaseActivity activity;
     private List<Currency> items;
     private CurrencyEvent.Type eventType;
+    private float scaleAnimationMin;
+    private float scaleAnimationMax;
 
     public CurrencyPickerRecycler(Context context) {
         super(context);
@@ -50,6 +52,9 @@ public class CurrencyPickerRecycler extends LoopRecyclerViewPager {
             activity = ViewUtils.getBaseActivity(context);
             activity.getComponent().inject(this);
         }
+
+        scaleAnimationMax = getScaleFactor();
+        scaleAnimationMin = 1f - getScaleFactor();
 
         LinearLayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         setLayoutManager(layout);
@@ -99,15 +104,15 @@ public class CurrencyPickerRecycler extends LoopRecyclerViewPager {
                         } else {
                             rate = 1;
                         }
-                        v.setScaleY(1 - rate * 0.3f);
-                        v.setScaleX(1 - rate * 0.3f);
+                        v.setScaleY(1 - rate *  scaleAnimationMin);
+                        v.setScaleX(1 - rate * scaleAnimationMin);
 
                     } else {
                         if (v.getLeft() <= recyclerView.getWidth() - padding) {
                             rate = (recyclerView.getWidth() - padding - v.getLeft()) * 1f / v.getWidth();
                         }
-                        v.setScaleY(0.7f + rate * 0.3f);
-                        v.setScaleX(0.7f + rate * 0.3f);
+                        v.setScaleY(scaleAnimationMax + rate * scaleAnimationMin);
+                        v.setScaleX(scaleAnimationMax + rate * scaleAnimationMin);
                     }
                 }
             }
@@ -118,24 +123,24 @@ public class CurrencyPickerRecycler extends LoopRecyclerViewPager {
                 if (getChildAt(1) != null) {
                     if (getCurrentPosition() == 0) {
                         View v1 = getChildAt(1);
-                        v1.setScaleY(0.7f);
-                        v1.setScaleX(0.7f);
+                        v1.setScaleY(scaleAnimationMax);
+                        v1.setScaleX(scaleAnimationMax);
                     } else {
                         View v1 = getChildAt(0);
-                        v1.setScaleY(0.7f);
-                        v1.setScaleX(0.7f);
+                        v1.setScaleY(scaleAnimationMax);
+                        v1.setScaleX(scaleAnimationMax);
                     }
                 }
             } else {
                 if (getChildAt(0) != null) {
                     View v0 = getChildAt(0);
-                    v0.setScaleY(0.7f);
-                    v0.setScaleX(0.7f);
+                    v0.setScaleY(scaleAnimationMax);
+                    v0.setScaleX(scaleAnimationMax);
                 }
                 if (getChildAt(2) != null) {
                     View v2 = getChildAt(2);
-                    v2.setScaleY(0.7f);
-                    v2.setScaleX(0.7f);
+                    v2.setScaleY(scaleAnimationMax);
+                    v2.setScaleX(scaleAnimationMax);
                 }
             }
 

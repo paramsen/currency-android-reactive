@@ -5,28 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:layout_height="80dp">
+    tools:layout_height="@dimen/currencyPickerSize">
 
     <com.amsen.par.cewlrency.view.view.currencypicker.CurrencyPickerRecycler
         android:id="@+id/currencyRecycler"
         style="@style/CurrencyPicker"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="12dp"
-        android:clipToPadding="false"
-        app:rvp_flingFactor=".2"
-        app:rvp_singlePageFling="false"
-        app:rvp_triggerOffset="0.1" />
+        android:layout_height="@dimen/currencyPickerSize"/>
 
     <ImageView
-        android:layout_width="16dp"
+        android:layout_width="@dimen/currencyPickerIndicatorSize"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/indicator" />
 
     <ImageView
-        android:layout_width="16dp"
+        android:layout_width="@dimen/currencyPickerIndicatorSize"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:rotation="180"

@@ -46,6 +46,7 @@ public class RecyclerViewPager extends RecyclerView {
     private int mPositionOnTouchDown = -1;
     private boolean mHasCalledOnPageChanged = true;
     private boolean reverseLayout = false;
+    private float scaleFactor = .7f;
 
     public RecyclerViewPager(Context context) {
         this(context, null);
@@ -65,6 +66,7 @@ public class RecyclerViewPager extends RecyclerView {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewPager, defStyle,
                 0);
         mFlingFactor = a.getFloat(R.styleable.RecyclerViewPager_rvp_flingFactor, 0.15f);
+        scaleFactor = a.getFloat(R.styleable.RecyclerViewPager_rvp_scaleFactor, .7f);
         mTriggerOffset = a.getFloat(R.styleable.RecyclerViewPager_rvp_triggerOffset, 0.25f);
         mSinglePageFling = a.getBoolean(R.styleable.RecyclerViewPager_rvp_singlePageFling, mSinglePageFling);
         a.recycle();
@@ -92,6 +94,14 @@ public class RecyclerViewPager extends RecyclerView {
 
     public void setSinglePageFling(boolean singlePageFling) {
         mSinglePageFling = singlePageFling;
+    }
+
+    public float getScaleFactor() {
+        return scaleFactor;
+    }
+
+    public void setScaleFactor(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
     }
 
     @Override

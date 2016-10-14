@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
@@ -12,6 +11,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/currencytFragmentPaddingTop"
         tools:background="@color/colorPrimary">
 
         <LinearLayout
@@ -22,7 +22,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="horizontal"
                 android:padding="2dp">
@@ -30,8 +29,9 @@
                 <ImageView
                     android:id="@+id/icon"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/icon_size"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/currenctFragmentIconMarginRight"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/icon_large"
@@ -41,7 +41,6 @@
                     style="@style/TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
                     android:gravity="center_vertical"
                     android:text="@string/app_name"
                     android:textColor="#88000000"
@@ -53,37 +52,37 @@
                 android:id="@+id/currencyPickerFrom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/currenctFragmentPickerFromMarginTop"
                 android:clipChildren="false"
-                tools:layout_height="80dp" />
+                tools:layout_height="@dimen/currencyPickerSize" />
 
             <com.amsen.par.cewlrency.view.view.CurrencyInput
                 android:id="@+id/currencyEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:transitionGroup="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="@dimen/currenctFragmentInputMarginTop"
+                android:transitionGroup="true" />
 
             <com.amsen.par.cewlrency.view.view.CurrencyPicker
                 android:id="@+id/currencyPickerTo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/currenctFragmentToMarginTop"
                 android:clipChildren="false"
-                tools:layout_height="80dp" />
+                tools:layout_height="@dimen/currencyPickerSize" />
 
             <com.amsen.par.cewlrency.view.view.CurrencyTextView
                 android:id="@+id/currencyTextView"
                 style="@style/TextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/text_size"
+                android:layout_marginTop="@dimen/currenctFragmentResultMarginTop"
+                android:textSize="@dimen/text_size_result"
                 tools:text="£2,456.78" />
         </LinearLayout>
 
@@ -91,12 +90,6 @@
             android:id="@+id/favFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="24dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_grade_black_24dp"
-            android:tint="@color/fabIconNormal"
-            app:backgroundTint="@color/fabNormal"
-            app:rippleColor="@color/colorAccent" />
+            style="@style/Widget.Design.FloatingActionButton.Currency" />
     </android.support.design.widget.CoordinatorLayout>
 </ScrollView>

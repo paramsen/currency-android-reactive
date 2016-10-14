@@ -9,7 +9,7 @@
         tools:text="SEK"
         android:id="@+id/title"
         android:textColor="#FFF"
-        android:textSize="32sp"
+        android:textSize="@dimen/currencyItemTextSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />

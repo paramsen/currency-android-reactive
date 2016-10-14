@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
     @Inject
     EventStream eventStream;
+
     private ViewComponent component;
     private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener;
     private Window window;
@@ -34,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        portraitWhenPhone();
         setContentView(getLayout());
 
         _inject();
@@ -107,8 +108,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         };
     }
 
+    private void portraitWhenPhone() {
+        if(!isTablet()) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
     public ViewComponent getComponent() {
         return component;
+    }
+
+    public boolean isTablet() {
+        return getResources().getBoolean(R.bool.isTablet);
     }
 
     @Override
