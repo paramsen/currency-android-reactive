@@ -27,3 +27,5 @@ Inspired by DDD, Fowler and React.
 * __Views:__ More encapsulation of View logic, think React. Views are the smallest components. Orchestrates themselves.
 * __Source:__ The Single Source of Truth for data, i.e. the data layer and the only entry for accessing data. Sources are the glue of this architecture.
 * __Dependency Injection__: A Graph of dependencies, used by Dagger2. Provides inversion of control, a View that needs a Source is not coupled with the instantiation of the Source. The View merely asks for a CurrencySource and gets it. Singletons and hard coupling, good bye.
+
+Thanks to fixer.io and github.com/lsjwzh/RecyclerViewPager for the RecyclerViewPager extensions.
