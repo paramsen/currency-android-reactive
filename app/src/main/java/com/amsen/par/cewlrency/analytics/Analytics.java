@@ -58,4 +58,8 @@ public class Analytics {
 
         analytics.logEvent("change_currency", bundle);
     }
+
+    public void openDebug() {
+        analytics.logEvent("open_debug", new Bundle());
+    }
 }

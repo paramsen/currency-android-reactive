@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.amsen.par.cewlrency.R;
+import com.amsen.par.cewlrency.analytics.Analytics;
 import com.amsen.par.cewlrency.base.rx.RxUtils;
 import com.amsen.par.cewlrency.base.rx.event.Event;
 import com.amsen.par.cewlrency.base.rx.event.EventStream;
@@ -47,6 +48,8 @@ public class CurrencyFragment extends BaseFragment {
     PreferencesSource preferencesSource;
     @Inject
     EventStream eventStream;
+    @Inject
+    Analytics analytics;
 
     @BindView(R.id.scrollView)
     ScrollView scrollView;
@@ -105,8 +108,8 @@ public class CurrencyFragment extends BaseFragment {
 
         if(debugClicks >= 10) {
             new DebugDialogFragment().show(getFragmentManager(), DebugDialogFragment.class.getName());
+            analytics.openDebug();
         }
-
     }
 
     private void setupBehavior() {
